@@ -1,0 +1,79 @@
+train_csv: data/processed/train_folds.csv
+image_dir: data/raw/images
+image_variant: full
+exclude_ids: model22/exclude_ids.txt
+text_normalization: NFD
+# Frozen before any Model29 OOF result is inspected. This makes the immediately
+# runnable five-store protocol label-leakage safe. True tuning requires the
+# optional pair-excluded inner stores documented in readme.txt.
+default_fixed_candidate: char4_a004
+
+# These values bind an OOF export/evaluation to the untouched canonical folds.
+# Test-set probability export is still allowed by omitting --fold.
+oof_contract:
+  input_sha256: 1173b87f6415f657d89a13b62f4d3d84bc926e550338ad4499963c89a81a16aa
+  total_rows: 4095
+  fold_rows: 819
+  fold_count: 5
+
+# The exporter refuses GPU and non-float32 settings. Batch size is hard-fixed
+# to one because Kraken's decoder callback carries no line IDs.
+probability_export:
+  accelerator: cpu
+  device: auto
+  precision: 32-true
+  threads: 4
+  line_workers: 0
+  padding: 16
+  temperature: 1.0
+  progress_every: 25
+
+# At most eight declared candidates are accepted. In tuned OOF mode, each
+# outer fold chooses among this fixed grid using only the other folds. The LM
+# used to score tuning fold g excludes both outer fold f and g.
+decoder_grid:
+  - name: greedy
+    mode: greedy
+    beam_width: 1
+    token_prune: 1
+    lm_order: 1
+    lm_smoothing: 0.2
+    lm_alpha: 0.0
+    word_boundary_weight: 0.0
+    word_boundary_smoothing: 1.0
+  - name: acoustic_beam12
+    mode: beam
+    beam_width: 12
+    token_prune: 8
+    lm_order: 4
+    lm_smoothing: 0.2
+    lm_alpha: 0.0
+    word_boundary_weight: 0.0
+    word_boundary_smoothing: 1.0
+  - name: char4_a004
+    mode: beam
+    beam_width: 12
+    token_prune: 8
+    lm_order: 4
+    lm_smoothing: 0.2
+    lm_alpha: 0.04
+    word_boundary_weight: 0.0
+    word_boundary_smoothing: 1.0
+  - name: char5_a008
+    mode: beam
+    beam_width: 12
+    token_prune: 8
+    lm_order: 5
+    lm_smoothing: 0.2
+    lm_alpha: 0.08
+    word_boundary_weight: 0.0
+    word_boundary_smoothing: 1.0
+  - name: char5_a008_word003
+    mode: beam
+    beam_width: 12
+    token_prune: 8
+    lm_order: 5
+    lm_smoothing: 0.2
+    lm_alpha: 0.08
+    word_boundary_weight: 0.03
+    word_boundary_smoothing: 1.0

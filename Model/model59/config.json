@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "model_number": 59,
+  "source_model": "model58",
+  "fit_policy": "second_outer_fold_excluded_oof_residual_pass",
+  "maximum_distance": 2,
+  "minimum_support": 2,
+  "minimum_precision": 1.0,
+  "minimum_length": 6,
+  "output_root": "outputs/model59"
+}

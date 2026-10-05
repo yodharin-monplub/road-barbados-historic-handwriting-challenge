@@ -1,0 +1,52 @@
+pretrained_model: checkpoints/model8/medium.safetensors
+train_csv: data/processed/train_folds.csv
+image_dir: data/raw/images
+exclude_ids: model71/exclude_ids.txt
+prepared_dir: data/processed/model71
+output_dir: outputs/model71/fold{fold}
+validation_fold: 0
+seed: 20260903
+image_variant: full
+runtime:
+  device: cuda:0
+  precision: bf16-mixed
+  workers: 12
+  threads: 8
+inference:
+  accelerator: gpu
+  device: auto
+  precision: bf16-mixed
+  batch_size: 4
+  threads: 12
+  line_workers: 0
+  padding: 16
+  progress_every: 25
+  preserve_internal_spaces: true
+  constrain_charset: false
+training:
+  strip_target_edges: true
+  codec_resize: new
+  ctc_subsampling: 8
+  height: 128
+  max_width: 6144
+  padding: 16
+  batch_size: 4
+  gradient_accumulation: 2
+  epochs: 10
+  all_data_epochs: 10
+  all_data_evaluation_rows: 128
+  min_epochs: 1
+  patience: 3
+  validation_frequency: 1
+  stop: fixed
+  optimizer: AdamW
+  learning_rate: 0.00005
+  min_learning_rate: 0.000001
+  weight_decay: 0.01
+  gradient_clip: 1.0
+  warmup_steps: 100
+  scheduler: cosine
+  cosine_epochs: 10
+  all_data_cosine_epochs: 10
+  normalization: NFD
+  augment: true

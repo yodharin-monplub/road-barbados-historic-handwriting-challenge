@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "model_number": 60,
+  "source_model": "model59",
+  "fit_policy": "outer_fold_excluded_truth_context_model",
+  "minimum_frequency": 1,
+  "context_weight": 16.0,
+  "distance_penalty": 32.0,
+  "fallback_frequency": 8,
+  "two_edit_min_length": 6,
+  "seed_minimum_frequency": 3,
+  "seed_ambiguity_ratio": 1.0,
+  "output_root": "outputs/model60"
+}

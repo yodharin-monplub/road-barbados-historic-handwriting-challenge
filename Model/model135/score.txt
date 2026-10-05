@@ -1,0 +1,3 @@
+﻿Architecture-aware (family) word vote - neutral, not deployed
+complete 5-fold OOF: 0.910236 versus 0.910200 for the plain rule (+0.000036)
+oracle ceiling over the five members: 0.928476

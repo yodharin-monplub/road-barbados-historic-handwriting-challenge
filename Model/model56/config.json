@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "model_number": 56,
+  "position": "initial_token_conditioned_on_next_core",
+  "minimum_count": 20,
+  "minimum_ratio": 0.9,
+  "key": "initial_and_next_ascii_alpha_core_casefold_strip_edge_nonalpha",
+  "source_model": "model55",
+  "output_root": "outputs/model56"
+}

@@ -1,0 +1,39 @@
+# Model154: TrOCR-large-handwritten (MIT, via microsoft/unilm), Model3 recipe with
+# a FIXED epoch count - no checkpoint selection on the validation fold.
+# Local copy of microsoft/trocr-large-handwritten @ e68501f437cd2587ae5d68ee457964cac824ddee,
+# given a tokenizer.json by make_tokenizer.py (transformers 5 cannot load it otherwise).
+# Relative to the project root, which is the working directory when training runs.
+model_name: Other/checkpoints/model154/trocr-large-handwritten
+train_csv: data/processed/train_folds.csv
+image_dir: data/raw/images
+exclude_ids: config/known_bad_train_ids.txt
+output_dir: outputs/model154/fold{fold}
+validation_fold: 0
+seed: 20260903
+image_height: 256
+image_width: 1024
+center_fraction: 0.84
+max_label_length: 192
+training:
+  epochs: 10
+  batch_size: 4
+  eval_batch_size: 4
+  gradient_accumulation: 2
+  learning_rate: 0.00002
+  weight_decay: 0.01
+  warmup_ratio: 0.05
+  scheduler: cosine
+  logging_steps: 20
+  eval_steps: 100000
+  save_steps: 100000
+  save_total_limit: 1
+  workers: 6
+  bf16: true
+  fp16: false
+  select_best: false
+generation:
+  batch_size: 16
+  max_new_tokens: 192
+  num_beams: 1
+  num_return_sequences: 1
+  length_penalty: 1.0

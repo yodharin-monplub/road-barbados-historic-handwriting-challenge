@@ -1,0 +1,59 @@
+pretrained_model: checkpoints/model8/medium.safetensors
+train_csv: data/processed/train_folds_pseudo5_fold{fold}.csv
+image_dir: data/raw/images
+exclude_ids: model149/exclude_ids.txt
+prepared_dir: data/processed/model149_fold{fold}
+output_dir: outputs/model149/fold{fold}
+validation_fold: 0
+seed: 20260903
+image_variant: full
+runtime:
+  device: cuda:0
+  precision: bf16-mixed
+  workers: 4
+  threads: 2
+inference:
+  accelerator: gpu
+  device: auto
+  precision: bf16-mixed
+  batch_size: 1
+  threads: 4
+  line_workers: 0
+  padding: 16
+  progress_every: 25
+  # Match training/scoring: preserve genuine repeated spaces while stripping
+  # prediction edges and mapping CR/LF line breaks to a single space.
+  preserve_internal_spaces: true
+  # resize=new already constrains decoding to this checkpoint's compact codec.
+  # An external all-fold mask can contain a validation-only character that is
+  # intentionally absent from a fold-trained codec and would fail at load time.
+  constrain_charset: false
+training:
+  strip_target_edges: true
+  codec_resize: new
+  # PP-OCRv6 downsamples width by 8. The preparation preflight uses this with
+  # height/padding/max_width and fails before Kraken can replace invalid rows.
+  ctc_subsampling: 8
+  height: 96
+  max_width: 3584
+  padding: 16
+  batch_size: 1
+  gradient_accumulation: 8
+  epochs: 10
+  all_data_epochs: 10
+  all_data_evaluation_rows: 128
+  min_epochs: 1
+  patience: 3
+  validation_frequency: 1
+  stop: fixed
+  optimizer: AdamW
+  learning_rate: 0.00005
+  min_learning_rate: 0.000001
+  weight_decay: 0.01
+  gradient_clip: 1.0
+  warmup_steps: 100
+  scheduler: cosine
+  cosine_epochs: 10
+  all_data_cosine_epochs: 10
+  normalization: NFD
+  augment: true

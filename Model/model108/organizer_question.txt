@@ -1,0 +1,15 @@
+Subject: Clarification on pretrained handwriting-generator augmentation
+
+May we use an openly available pretrained handwriting image generator, run
+privately with open-source code, to generate additional training images from
+the supplied Train.csv transcriptions and supplied training-image style crops?
+
+The proposed model is DiffusionPen. We would download only its publicly
+available model weights and required dependencies, not IAM or any other external
+dataset, reference image, font dataset, text corpus or pre-generated images.
+All generation, filtering and training would be automatic and reproducible.
+We would preserve the supplied spelling and punctuation and use no manual
+annotations, manually selected fixes or test images in generation.
+
+The StackMix ruling explicitly approves crop recombination. Does permission
+also extend to this pretrained generative approach, or is it prohibited?

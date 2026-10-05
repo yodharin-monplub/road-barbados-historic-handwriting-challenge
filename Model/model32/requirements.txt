@@ -1,0 +1,2 @@
+# Model32 deliberately reuses Model27's exact isolated environment.
+-r ../model27/requirements.txt

@@ -1,0 +1,49 @@
+{
+  "model_number": 49,
+  "purpose": "Frozen whole-vector no-repeat 4-gram versus 8-gram decoding comparison for the completed Model39 fold-0 adapter.",
+  "base_model39": {
+    "config": "model39/config.yaml",
+    "config_sha256": "4e8d28cdbeccd719a76a989a3de29fefbd3d72f9f444c76ec3ec6ba729479ef5",
+    "sources": {
+      "model39_infer": {"path": "model39/infer.py", "sha256": "65384c442302019537439d98c9bc200e9f6f2d4bc51e1e4dc29363f213700c72"},
+      "broad_runtime": {"path": "src/road_htr/qwen2_vl_broad.py", "sha256": "ab8d9b77154bd3c0ef8470b07310c85e6408ca4a98f72b19a7baba478da1a606"},
+      "challenger_runtime": {"path": "src/road_htr/qwen2_vl_challenger.py", "sha256": "148b39afac28d78de32f68acabc590a5cd885465820171c2d0efc2e2d862ee12"},
+      "schema": {"path": "src/road_htr/schema.py", "sha256": "41f044b7fdc6f7bd7c233813525af1af3ad3123b0cb88528ba06fe0355d5ba8b"},
+      "submission": {"path": "src/road_htr/submission.py", "sha256": "6e1399a008b5bceba9d51be3b50ac57029dd9748759d5dbd1c6e2219d1129c42"}
+    },
+    "adapter_root": "outputs/model39",
+    "required_model_number": 39,
+    "registered_fold": 0,
+    "required_optimizer_updates": 615
+  },
+  "input": {
+    "path": "data/processed/train_folds.csv",
+    "sha256": "1173b87f6415f657d89a13b62f4d3d84bc926e550338ad4499963c89a81a16aa",
+    "rows": 4095,
+    "fold0_rows": 819
+  },
+  "panel": [
+    {"name": "greedy_ngram4_control", "do_sample": false, "num_beams": 1, "num_return_sequences": 1, "max_new_tokens": 48, "repetition_penalty": 1.05, "no_repeat_ngram_size": 4, "use_cache": true},
+    {"name": "greedy_ngram8_challenger", "do_sample": false, "num_beams": 1, "num_return_sequences": 1, "max_new_tokens": 48, "repetition_penalty": 1.05, "no_repeat_ngram_size": 8, "use_cache": true}
+  ],
+  "only_policy_difference": "no_repeat_ngram_size",
+  "frozen_omissions": ["length_penalty", "early_stopping", "eos_token_id", "forced_eos_token_id"],
+  "label_constraint_audit": {
+    "tokenizer_add_special_tokens": false,
+    "transformers_version": "4.49.0",
+    "definition": "A target is constrained when its tokenizer-ID sequence contains the same contiguous n-gram more than once.",
+    "expected": {
+      "4": {
+        "count": 26,
+        "by_fold": {"0": 4, "1": 5, "2": 8, "3": 3, "4": 6},
+        "sorted_ids_sha256": "9efca695307d87ccb97378ac1cd9b84fc092238050179668f7301e464180bef2"
+      },
+      "8": {
+        "count": 1,
+        "by_fold": {"0": 0, "1": 0, "2": 1, "3": 0, "4": 0},
+        "sorted_ids_sha256": "224dc18e0ce55b739af5c52945c84cffd14206a3ad0c38c5d086e47cdbb00e2b"
+      }
+    }
+  },
+  "output_root": "outputs/model49"
+}

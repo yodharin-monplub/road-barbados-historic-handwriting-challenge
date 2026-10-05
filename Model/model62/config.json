@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "model_number": 62,
+  "source_model": "model61",
+  "fit_policy": "outer_fold_excluded_exact_boundary_insertions",
+  "maximum_inserted_tokens": 2,
+  "minimum_support": 3,
+  "minimum_precision": 0.5,
+  "operation": "difflib_insert_blocks_with_exact_left_right_context",
+  "output_root": "outputs/model62"
+}

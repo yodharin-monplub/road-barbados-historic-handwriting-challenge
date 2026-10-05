@@ -1,0 +1,34 @@
+Model151: a FOURTH Kraken CTC variant, round-3 pseudo-labels
+NEGATIVE RESULT - not deployed. This is where CTC diversity saturates.
+
+complete 5-fold OOF: 0.805031
+The four Kraken variants, all within 0.002 of each other:
+  Model130 (no pseudo-labels)  0.805866
+  Model149 (round-5)           0.804717
+  Model150 (round-4)           0.806886
+  Model151 (round-3)           0.805031
+
+ENSEMBLE (complete OOF, anchor model134_pseudo3, min_votes 2)
+  fourteen members (deployed candidate)  0.922014
+  fifteen (+model151)                    0.921492  (-0.000522)
+  fifteen, min_votes 3                   0.921351  (-0.000662)
+bootstrap fifteen vs fourteen: -0.000522, 95% [-0.000993, -0.000053], 1.5% positive.
+A real loss, not noise.
+
+THE LIMIT, MEASURED
+  1 Kraken  ->  2 (Model149): +0.000438
+  2 Kraken  ->  3 (Model150): +0.000298
+  3 Kraken  ->  4 (Model151): -0.000522
+Retraining one architecture on different data buys decorrelation, but only until
+the variants start agreeing with each other more than they disagree with the rest
+of the ensemble. Three is the useful number here; the fourth is Model148 again -
+a near-duplicate whose correlated vote outweighs what it adds.
+
+Together with Model148 (a GOT-OCR2 twin, -0.00075) and Model147 (the strongest
+single member, +0.0004 only), the full picture: ensemble gains come from
+decorrelation, decorrelation saturates, and neither member quality nor member
+count predicts the gain on its own.
+
+cost: about 2.6 USD for five folds. One host shipped an 84-byte medium.safetensors
+instead of the real checkpoint; the sha256 check in the run script caught it before
+any GPU time was wasted on a corrupt initialisation. Keep that check.

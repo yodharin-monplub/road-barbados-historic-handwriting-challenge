@@ -1,0 +1,19 @@
+{
+  "status": "user_confirmed_rules_proceed",
+  "rules_confirmation": {"date": "2026-09-07", "source": "user", "text": "i check the rule for 108 it's ok proceed", "note": "User confirms rules checked. This is not an independently retrieved organizer ruling."},
+  "prior_experiment_report": "outputs/model107/fold0_report.json",
+  "generator_repository": "konnik/DiffusionPen",
+  "generator_code": "https://github.com/koninik/DiffusionPen",
+  "revision": "5636a68365001435ec76553114313c22c6f1ca07",
+  "code_revision": "059e2f2bcb7372231038719e955597917c1a8783",
+  "canine_revision": "dc0eaffdff3fa9161613311c7096eeb3e133ee19",
+  "vae_revision": "451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+  "revision_note": "Immutable upstream versions inspected 2026-09-07; weight/code SHA256 recorded on download.",
+  "pilot_words": 200,
+  "style_references_per_source_line": 5,
+  "seed": 20260903,
+  "required_exact_agreement": ["fold_excluded_kraken", "fold_excluded_lightonocr"],
+  "external_datasets_allowed": false,
+  "forbidden_asset_patterns": ["saved_iam_data", "*.pickle", "*dataset*", "*Generated_img*"],
+  "notes": "Proceeding after explicit user rules confirmation. Only allowlisted pretrained weights/code; no upstream IAM dataset or generated images."
+}

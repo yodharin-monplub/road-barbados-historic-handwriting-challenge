@@ -1,0 +1,56 @@
+{
+  "name": "model122_lora_local",
+  "base": "Other/checkpoints/model73/lightonocr-2-1b-base",
+  "train_csv": "Data/processed/train_folds.csv",
+  "test_csv": "Data/raw/Test.csv",
+  "image_dir": "Data/raw/images",
+  "exclude_ids": "Other/config/known_bad_train_ids.txt",
+  "output_dir": "Other/outputs/model122_lora_local",
+  "seed": 20260918,
+  "mode": "lora",
+  "lora": {
+    "rank": 64,
+    "alpha": 128,
+    "dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ]
+  },
+  "target_height": 128,
+  "height_jitter": 0.1,
+  "longest_edge": 2800,
+  "augmentation": {
+    "enabled": true,
+    "probability": 0.9,
+    "brightness": 0.08,
+    "contrast": 0.12,
+    "rotation_degrees": 0.5,
+    "translate_y_fraction": 0.015,
+    "blur_probability": 0.15,
+    "blur_radius": 0.4
+  },
+  "epochs": 2,
+  "batch_size": 2,
+  "grad_accum": 8,
+  "lr": 0.0001,
+  "weight_decay": 0.01,
+  "warmup_ratio": 0.05,
+  "min_lr_ratio": 0.05,
+  "max_grad_norm": 1.0,
+  "gradient_checkpointing": true,
+  "eval_batch_size": 8,
+  "eval_epochs": [
+    2
+  ],
+  "final_beams": 1,
+  "max_new_tokens": 96,
+  "repetition_penalty": 1.0,
+  "workers": 2,
+  "log_steps": 10
+}

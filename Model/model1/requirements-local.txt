@@ -1,0 +1,8 @@
+# The isolated `.venv-lighton` reuses the project's pinned CUDA torch 2.13.0
+# wheel through its recorded site-packages path. These are the model-specific
+# packages installed directly in that environment.
+transformers==5.16.1
+accelerate==1.14.0
+safetensors==0.8.0
+Pillow==12.3.0
+PyYAML==6.0.3

@@ -1,0 +1,7 @@
+{
+  "maximum_distance": 2,
+  "minimum_token_length": 6,
+  "minimum_bigram_count": 5,
+  "context_weight": 4.0,
+  "distance_penalty": 16.0
+}

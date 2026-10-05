@@ -1,0 +1,37 @@
+Model154: TrOCR-large-handwritten (MIT), fixed 10 epochs, no pseudo-labels
+NEGATIVE / INCONCLUSIVE - not deployed.
+
+complete 5-fold OOF alone: 0.838563
+  (the weak-but-different tier: Kraken 0.8059, GOT-OCR2 0.8145)
+
+ENSEMBLE (complete OOF, anchor model134_pseudo3, min_votes 2)
+  twelve pruned members (DEPLOYED, public 0.919377)  0.922499
+  thirteen (+model154)                               0.922677  (+0.000179)
+  thirteen, min_votes 3                              0.922415
+bootstrap thirteen vs twelve: +0.000179, 95% [-0.000250, +0.000626], 79.7% positive
+
+HONEST CHECK (Model/model154/member_select154.py, the Model152 method)
+  selection on folds 0-3 kept all thirteen (TrOCR included), BUT on held-out fold 4:
+    deployed twelve   0.920565
+    thirteen          0.919984   (-0.000581)
+  Fold 0 alone had shown +0.000451. The sign flips between folds: this is noise
+  around zero, not a gain. The complete-OOF +0.00018 is smaller than the held-out
+  loss and the bootstrap cannot separate it from zero.
+
+Why not deploy on the Model140 precedent (a non-significant CV gain that still moved
+the public score)? Because here there IS an honest out-of-selection estimate, and it
+is negative. Model140 had no such check.
+
+READING
+A genuinely new architecture family did not add enough decorrelation to beat a
+twelve-member ensemble that is already this diverse. Earlier, GOT-OCR2 (a new
+family at the time) gave +0.0007 to an EIGHT-member ensemble; the ensemble has since
+absorbed most of the remaining error diversity, and a 0.84 standalone member now
+brings more noise than signal to a min_votes 2 rule.
+
+candidate (NOT recommended): Other/submissions/model154_ensemble13_candidate.csv
+  33 of 1374 test lines differ from the deployed twelve
+  sha256 ce4295e19f9a0f186b7b0113fe17570328bbfcfb5510725e28ab791525312936
+
+cost: about 2.65 USD - one RTX 5090 at ~0.51 USD/h for ~5.2 h, including a fold-0
+run lost to a save error (see readme.txt, fix 5). Full evaluation log: final154.log.

@@ -1,0 +1,34 @@
+model_name: lightonai/LightOnOCR-2-1B
+revision: c97bd377f04481830395218fa8951df9deaba756
+license: Apache-2.0
+local_path: checkpoints/model1/lightonocr-2-1b
+local_files_only: true
+model_class: LightOnOcrForConditionalGeneration
+processor_class: LightOnOcrProcessor
+fix_mistral_regex: true
+image_dir: data/raw/images
+seed: 20260903
+dtype: bfloat16
+load_in_4bit: false
+image_variant: full
+prompt: ""
+generation:
+  # The longest supplied target is 34 tokens with this pinned tokenizer.
+  # Forty leaves headroom while preventing rare non-terminating repetition.
+  max_new_tokens: 40
+  num_beams: 1
+  num_return_sequences: 1
+  repetition_penalty: 1.05
+  length_penalty: 1.0
+expected_files_sha256:
+  README.md: 92a1e0f0a25403e345510cd78256caa86c9c5db89625663011b7a953cef212bf
+  added_tokens.json: c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680
+  chat_template.jinja: 0942a43ee0ba48a608814e0b40ac9cb70bcc29ea72f19c84b1bf2597f05aa2bd
+  config.json: 43b62f9ec0a7207f67fd032f7ef9719fa8b6b44d7b3cf20fbc2346329493ff3a
+  generation_config.json: 7d2566b271454af41e9ebc28851888e1ec7ca33a53fe644dac207856df952981
+  model.safetensors: cbe12d0831cca119facce91268fc7c5fb72babdf919a6e352e3131bda85c8fbb
+  processor_config.json: 5292a61a089835ec6884836e3896bba1fc571c60df872e3ca9eb45bd3288910d
+  special_tokens_map.json: 76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd
+  tokenizer.json: f54b55fa0c3aba0c91ce09ea79ae4e62da24e2a1a630f96c4bae34aba25e234a
+  tokenizer_config.json: 31f5876fbfe2bba0d931d540b84f4ffa03eb7c364d31858c38d1bf2c2fff97f3
+  upstream_manifest.json: cad20b849064b670fd6078f80d3642541def2cb06e036d70474ecb9916c07144

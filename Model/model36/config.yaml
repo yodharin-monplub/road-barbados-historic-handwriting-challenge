@@ -1,0 +1,56 @@
+pretrained_model: checkpoints/model8/medium.safetensors
+train_csv: data/processed/train_folds.csv
+image_dir: data/raw/images
+exclude_ids: model22/exclude_ids.txt
+prepared_dir: data/processed/model36
+output_dir: outputs/model36/fold{fold}
+validation_fold: 0
+seed: 20260903
+image_variant: full
+runtime:
+  device: cuda:0
+  precision: bf16-mixed
+  workers: 4
+  threads: 2
+inference:
+  accelerator: gpu
+  device: auto
+  precision: bf16-mixed
+  batch_size: 1
+  threads: 4
+  line_workers: 0
+  padding: 16
+  progress_every: 25
+  preserve_internal_spaces: true
+  constrain_charset: false
+training:
+  strip_target_edges: true
+  codec_resize: new
+  ctc_subsampling: 8
+  height: 96
+  max_width: 3584
+  padding: 16
+  batch_size: 1
+  gradient_accumulation: 8
+  # Fixed before training folds 1-4: Model22 fold 0 peaked at zero-based
+  # epoch 7 under the exact challenge metric, i.e. eight completed epochs.
+  epochs: 8
+  all_data_epochs: 8
+  all_data_evaluation_rows: 128
+  min_epochs: 1
+  patience: 3
+  validation_frequency: 1
+  stop: fixed
+  optimizer: AdamW
+  learning_rate: 0.00005
+  min_learning_rate: 0.000001
+  weight_decay: 0.01
+  gradient_clip: 1.0
+  warmup_steps: 100
+  # Retain the original ten-epoch cosine horizon so the first eight epochs
+  # exactly match Model22's preregistered optimization trajectory.
+  scheduler: cosine
+  cosine_epochs: 10
+  all_data_cosine_epochs: 10
+  normalization: NFD
+  augment: true

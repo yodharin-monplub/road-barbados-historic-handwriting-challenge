@@ -1,0 +1,8 @@
+torch==2.14.0
+transformers==5.16.1
+accelerate==1.14.0
+Pillow==12.1.1
+PyYAML==6.0.3
+safetensors>=0.6,<0.8
+sentencepiece>=0.2,<0.3
+

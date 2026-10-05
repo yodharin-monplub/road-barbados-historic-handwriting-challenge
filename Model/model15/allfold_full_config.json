@@ -1,0 +1,6 @@
+{
+  "maximum_distance": 2,
+  "minimum_support": 2,
+  "minimum_precision": 0.6666666666666666,
+  "minimum_length": 2
+}

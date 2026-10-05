@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "model_number": 54,
+  "position": "final_token_only",
+  "minimum_count": 15,
+  "minimum_ratio": 1.0,
+  "key": "ascii_alpha_core_casefold_strip_edge_nonalpha",
+  "source_model": "model25",
+  "output_root": "outputs/model54"
+}

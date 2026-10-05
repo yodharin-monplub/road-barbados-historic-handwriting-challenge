@@ -1,0 +1,6 @@
+{
+  "minimum_count": 20,
+  "minimum_ratio": 1.0,
+  "normalization": "unicode_lowercase",
+  "action": "restore_unanimous_exact_case"
+}

@@ -1,0 +1,2 @@
+Character-level vote variant - REJECTED
+complete 5-fold OOF multi_score: 0.903308 versus 0.905544 for the word vote

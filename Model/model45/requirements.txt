@@ -1,0 +1,3 @@
+# Reuse the pinned Qwen2-VL environment; no dependency installation is needed.
+-r ../model40/requirements.txt
+

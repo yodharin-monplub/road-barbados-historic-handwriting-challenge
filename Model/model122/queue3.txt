@@ -1,0 +1,5 @@
+model122/config_prod_beam.json 0 --predict-test
+model122/config_prod.json 1 --predict-test
+model122/config_prod.json 2 --predict-test
+model122/config_prod.json 3 --predict-test
+model122/config_prod.json 4 --predict-test

@@ -1,0 +1,20 @@
+Qwen2.5-VL-7B LoRA with vision attention adapted (Model136 adapted only the vision MLPs)
+standalone per fold: 0.904500 / 0.904374 / 0.898951 / 0.907295 / 0.897693
+complete 5-fold OOF: 0.902563   (Model136: 0.902391)  <- best single member, narrowly
+ensembles, complete OOF, anchor model134_pseudo3, min_votes 2:
+  nine members (deployed, public 0.915839)   0.917124
+  TEN members (+model144)                    0.918854  (+0.001730)  <- NEW BEST CV
+  ten members, min_votes 3                   0.917950
+  nine, model144 replacing model136          0.917419  (+0.000295, not significant)
+bootstrap 10 vs 9 (3,000): 95% [+0.001065, +0.002392], 100.0% positive
+It is worth more as an extra member than as a replacement: Model136 and Model144
+are the same base model but make different errors.
+test: fold 0 test predictions were not written (host stopped to save credit), so the
+member's test vector is a 3-of-4 majority over folds 1-4.
+candidate: Other/submissions/model144_ensemble10_candidate.csv
+  42 test lines differ from the deployed nine-member submission
+  sha256 4ec2c3979ed4e228b1e3b5283c1bf67ff4f2975a65c658927f852f902239b1ce
+public: 0.916291517  <- NEW BEST (nine-member 0.915838876, +0.000453)
+public/CV ratio this step: 0.00045 / 0.00173 = 0.26 (Model143 step: 0.07)
+cost: about 7 USD of account credit for folds 1-4 (two slow hosts at 27-32 s/step,
+one duplicate, one host with a GPU fault).

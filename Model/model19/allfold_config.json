@@ -1,0 +1,16 @@
+{
+  "rule": {
+    "lm_order": 5,
+    "lm_smoothing": 0.2,
+    "lm_alpha": 0.5,
+    "secondary_offset": 0.02,
+    "tertiary_offset": 0.01,
+    "minimum_length_ratio": 0.9
+  },
+  "validation_multi_score": 0.7537819726277036,
+  "selected_counts": {
+    "primary": 641,
+    "secondary": 2047,
+    "tertiary": 1407
+  }
+}

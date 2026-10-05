@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "outer_fold": 0,
+  "inner_folds": 5,
+  "partition_salt": "model34-token-fusion-v1",
+  "protected_characters": "^&",
+  "selection": {
+    "minimum_training_gain": 0.00025
+  },
+  "bootstrap": {
+    "samples": 5000,
+    "seed": 340034
+  },
+  "candidate_space": {
+    "granularities": ["token", "character"],
+    "quality_kinds": ["min", "q10", "mean"],
+    "confidence_thresholds": [0.85, 0.9, 0.925, 0.95, 0.975, 0.99],
+    "maximum_token_distances": [0.25, 0.3333333333333333, 0.5, 0.6666666666666666],
+    "maximum_row_distances": [0.2, 0.35, 0.5, 1.0],
+    "contexts": ["none", "one"],
+    "token_modes": ["any", "alphabetic"]
+  },
+  "provenance": {
+    "truth": {
+      "path": "data/processed/train_folds.csv",
+      "sha256": "1173b87f6415f657d89a13b62f4d3d84bc926e550338ad4499963c89a81a16aa"
+    },
+    "baseline": {
+      "path": "outputs/model25/allfold_oof.csv",
+      "sha256": "99ae115570e44a249641551143f2134458c44039d59595cb291f09cb3b1b7251"
+    },
+    "fine_jsonl": {
+      "path": "outputs/model22/checkpoint_evaluation/fold0/predictions/checkpoint_07-0.9209.jsonl",
+      "sha256": "daf37d8001d67e031ec0aebd3ec028a2a1ca369e36c8c8414d6263ef903cbbf4"
+    },
+    "fine_csv": {
+      "path": "outputs/model22/checkpoint_evaluation/fold0/predictions/checkpoint_07-0.9209.csv",
+      "sha256": "502634e084ba5cce9f28e7de71db5bf06f20c7587c6dac831c48b2940fac37ee"
+    },
+    "fine_manifest": {
+      "path": "outputs/model22/checkpoint_evaluation/fold0/predictions/checkpoint_07-0.9209.manifest.json",
+      "sha256": "0dd5ff258035fa3e1d88156e6855e2ab7ecf9cdb89c0557eec2b4bace2aa14ff"
+    },
+    "fine_evaluation": {
+      "path": "outputs/model22/checkpoint_evaluation/fold0/predictions/checkpoint_07-0.9209.evaluation.json",
+      "sha256": "292dc650c051b3ce74aa46b9e4b7f10fc762a96df6bf6f26f2a9ca3c83c2851c"
+    },
+    "checkpoint_name": "checkpoint_07-0.9209.ckpt",
+    "expected_truth_rows": 4095,
+    "expected_fold_rows": 819
+  }
+}

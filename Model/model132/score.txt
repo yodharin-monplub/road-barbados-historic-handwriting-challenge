@@ -1,0 +1,4 @@
+﻿Second Kraken variant at 128px line height - REJECTED on fold 0
+standalone fold 0: 0.801171 (versus 0.809760 for the 96px member)
+6-member vote: 0.910925 versus 0.911511 for 5 members  => -0.000586
+folds 1-4 not trained

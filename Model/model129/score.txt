@@ -1,0 +1,4 @@
+Round-2 pseudo-labels (per-fold ensemble votes over the test images)
+complete 5-fold OOF multi_score: 0.900386
+five-member vote: 0.906780
+public: 0.910015562

@@ -1,0 +1,25 @@
+Model148: GOT-OCR2 (Model141 recipe) with round-5 pseudo-labels instead of round-4
+NEGATIVE RESULT - not deployed.
+
+standalone per fold: 0.818038 / 0.814756 / 0.812098 / 0.814575 / 0.813538
+complete 5-fold OOF: 0.814602   (Model141 with round-4 labels: 0.814526, +0.000076)
+per fold vs Model141: +0.004483 / +0.000435 / -0.000677 / -0.002712 / -0.001147
+One fold up, three down: a better labeller did nothing for this member.
+
+ENSEMBLE (complete OOF, anchor model134_pseudo3, min_votes 2)
+  twelve members (deployed candidate)   0.921278
+  thirteen (+model148)                  0.920529  (-0.000748, bootstrap 0.2% positive - a real loss)
+  thirteen, min_votes 3                 0.920552
+  twelve, model148 REPLACING model141   0.921301  (+0.000023, inside noise)
+
+Two things learned:
+ - The pseudo-label ladder is architecture-specific. It paid +0.0046 on Qwen3-VL-4B
+   and +0.0055 on Qwen3-VL-8B, but nothing on GOT-OCR2, whose weighted CER barely
+   moves with better targets. Predicting which member will benefit is not yet possible
+   from the member's own score.
+ - Adding a near-duplicate of an existing member HURTS. Model148 and Model141 agree
+   almost everywhere, so together they carry two correlated votes into a min_votes 2
+   rule and can outvote the correct minority. The ensemble wants different errors,
+   not more of the same - the same lesson as Model147, measured from the other side.
+
+cost: about 4.26 USD for five folds on five rented RTX 3090s (7-10 s/step, ~3 h each).

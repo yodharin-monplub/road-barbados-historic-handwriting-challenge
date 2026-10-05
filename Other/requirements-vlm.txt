@@ -1,0 +1,14 @@
+# Install the CUDA build of torch appropriate for the training host if the
+# default PyPI wheel is unsuitable. Record the resolved build in run_manifest.
+torch==2.14.0
+transformers==5.16.1
+trl==0.29.1
+peft==0.20.0
+datasets==5.0.1
+accelerate==1.14.0
+bitsandbytes==0.50.2
+Pillow==12.1.1
+PyYAML==6.0.3
+safetensors>=0.6,<0.8
+sentencepiece>=0.2,<0.3
+

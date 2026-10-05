@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "model_number": 52,
+  "policy_name": "frozen_guarded_char_lm_v1",
+  "fallback_model": "model25",
+  "vlm_stage": "model46_confusions",
+  "selection_inputs": [
+    "fallback_prediction",
+    "vlm_prediction",
+    "fold_excluded_label_char_lm"
+  ],
+  "forbidden_selection_inputs": [
+    "heldout_target",
+    "identifier",
+    "image_geometry",
+    "test_membership"
+  ],
+  "policy": {
+    "char_lm_order": 5,
+    "char_lm_smoothing": 0.2,
+    "minimum_language_advantage": 0.04,
+    "edit_distance_penalty": 0.08,
+    "maximum_normalized_char_distance": 0.6,
+    "minimum_character_length_ratio": 0.65,
+    "maximum_character_length_ratio": 1.4,
+    "minimum_token_length_ratio": 0.6,
+    "maximum_token_length_ratio": 1.5,
+    "repeated_word_ngram_size": 4,
+    "maximum_repeated_word_ngram_count": 1
+  },
+  "output_root": "outputs/model52"
+}

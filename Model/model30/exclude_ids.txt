@@ -1,0 +1,10 @@
+# Model30 mirrors Model22's recognizer-safe population, but owns its policy.
+# Confirmed unusable image/transcription pairs from the original training CSV:
+79tMUVyfIdy3GzkG
+rh8o7bdCGOIBFPwH
+F8DYDDp2AvW9Dytw
+
+# Valid labels that cannot fit PP-OCRv6's CTC time axis at this geometry:
+EcxuqKeZl7OQexfB
+gP7kGWfDFYMbZ8nO
+PO7QQLWIFOT65BTz

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "model": {
+    "id": "Qwen/Qwen3-VL-30B-A3B-Instruct",
+    "revision": "9c4b90e1e4ba969fd3b5378b57d966d725f1b86c",
+    "license": "Apache-2.0",
+    "architecture": "Qwen3VLMoeForConditionalGeneration",
+    "dtype": "bfloat16",
+    "expected_weight_payload_bytes": 62141508064,
+    "expected_weight_file_bytes": 62141618016,
+    "expected_metadata_sha256": {
+      "README.md": "37d278ac62511b5267c1a65d83d5c93a1234c7c3aafc68fb5be48a385269aef5",
+      "chat_template.json": "5c72a170d2a4a1a3bc5adad2e689ae28138a9700e5b8c96c0266331e86c0acce",
+      "config.json": "6129b3f54d517a18553cf7525ff4886be6831c5806fc094d632b8ef38d859912",
+      "generation_config.json": "1e241830b48b397cb0900101421df5450baddc7adf01e5fc86b5615865f3bae4",
+      "model.safetensors.index.json": "4fa496bd4b4aace60623070379297c7c0c78b5aa4924b39e1174a0e9e1aeae5e",
+      "preprocessor_config.json": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+      "tokenizer_config.json": "c2da771801886ad9ae98181793ffd3dfb7f1af30f6f7c6a4e15d7dbba52e2399",
+      "video_preprocessor_config.json": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13"
+    },
+    "expected_shards": {
+      "model-00001-of-00013.safetensors": {"bytes": 4399341032, "sha256": "6b205ea6332a532e5b97fd6281ac700f125a1a5f9a3457a22b797edfd35a5f67"},
+      "model-00002-of-00013.safetensors": {"bytes": 4984970880, "sha256": "a739a546e00643e0555bbb6bcd57fa5ba60fb2de24177c8819d2f899f02c2223"},
+      "model-00003-of-00013.safetensors": {"bytes": 4984970888, "sha256": "c57ec0f3fd06cae62980851f2661bd2b5e9dcdff37b8f9ece0cf44dea645efc3"},
+      "model-00004-of-00013.safetensors": {"bytes": 4984970928, "sha256": "46b07bc82396976dc62f86bccb51c3c585a616b36b8ad8eef700bde75fedf88b"},
+      "model-00005-of-00013.safetensors": {"bytes": 4984970928, "sha256": "3fa2fdf4b835d885efcaf0e4f6c7c00905cbaad7e293af988a0cf5408c3078c8"},
+      "model-00006-of-00013.safetensors": {"bytes": 4984970928, "sha256": "89a762b82ff9db9351cd38794ecd1ee170bbe87d7fa56110ca837c088158ccfb"},
+      "model-00007-of-00013.safetensors": {"bytes": 4984970928, "sha256": "634e437c0a038d8f447fceb44fb4f5230600af6a71d0fbe112711d9e84d6f07a"},
+      "model-00008-of-00013.safetensors": {"bytes": 4984970928, "sha256": "4c6f316b27536bd914a6ea09c03ec1b80a9a8d55e3478b1bd5a307f8de8d7fbd"},
+      "model-00009-of-00013.safetensors": {"bytes": 4984970928, "sha256": "e2e2a338c724ad75aea2b64211472c1037945fab398a879116cbbbc3112391da"},
+      "model-00010-of-00013.safetensors": {"bytes": 4984970928, "sha256": "adca9184b757627840f7fce81e8e4e1203c7551fa2c1bdb469503dc7dfab0583"},
+      "model-00011-of-00013.safetensors": {"bytes": 4984970928, "sha256": "71b3d1ff9ddc9358de332aa52b92fc001565edfcfd61f9e3679f96f85c7cbc22"},
+      "model-00012-of-00013.safetensors": {"bytes": 4984970928, "sha256": "f4b204bedb467a2cea642dc38d30c2cdd29e48fbd2d7d5ee5cc14ba4b786ef6f"},
+      "model-00013-of-00013.safetensors": {"bytes": 2907596864, "sha256": "e167e2806d63c404660b6d609a7eaef2e82bca478688ba6f83155128d8187539"}
+    },
+    "max_model_len": 4096,
+    "gpu_memory_utilization": 0.96,
+    "minimum_gpu_memory_gib": 75
+  },
+  "data": {
+    "truth": "data/processed/train_folds.csv",
+    "test": "data/raw/Test.csv",
+    "image_dir": "data/raw/images",
+    "sample_submission": "data/raw/SampleSubmission.csv"
+  },
+  "prompt": "read this image and convert to text, it's old english. Do not change to normal english",
+  "image": {
+    "min_pixels": 65536,
+    "max_pixels": 1572864,
+    "maximum_images_per_prompt": 1
+  },
+  "generation": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_new_tokens": 128,
+    "seed": 20260906
+  },
+  "execution": {
+    "batch_size": 32
+  },
+  "validity": {
+    "maximum_characters": 200
+  },
+  "promotion": {
+    "fold0_minimum_gain": 0.001
+  }
+}

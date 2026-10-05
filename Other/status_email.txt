@@ -1,0 +1,19 @@
+Subject: road_htr status - new best CV 0.917124, submission ready
+
+STATUS (2026-09-22)
+- Best CV: 0.917124 (complete 5-fold OOF), up from 0.914150 (submission #7, public 0.915619).
+  - GOT-OCR2 folds 1-4 finished -> eight-member ensemble 0.914857 (bootstrap 99.2% positive).
+  - Model143: Qwen3-VL-4B retrained with its vision encoder actually trained (Model123 had it
+    frozen by a LoRA naming mismatch). Standalone 0.8939 vs ~0.838. Nine-member ensemble
+    0.917124, +0.002267 over eight, bootstrap 100% positive.
+- All GPUs stopped. vast.ai credit left: 0.52 USD.
+
+READY FOR YOU
+- Upload: Other/submissions/model143_ensemble9_candidate.csv
+  (sha256 6bda84275ca0fef1350266ea3ada437db705a76ca2439fd45ee8917810490cec, 37 lines differ from #7)
+
+PERMISSION NEEDED
+- Model144 (Qwen2.5-VL-7B with vision attention trained): fold 0 gave +0.0006 to the ensemble.
+  Folds 1-4 need about 2.6 USD. Top up vast.ai credit (~3 USD) and reply "go" to run it.
+
+Details: Model/model141, Model/model143, Model/model144 (score.txt, readme.txt).

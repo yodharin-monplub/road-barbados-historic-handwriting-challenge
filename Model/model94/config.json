@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "source_model": "model93",
+  "primary": "model88",
+  "maximum_absolute_character_edits": 6,
+  "development_fold": 0,
+  "confirmation_folds": [1, 2, 3, 4],
+  "confirmation_minimum_gain": 0.0005,
+  "confirmation_minimum_nonnegative_folds": 3,
+  "bootstrap_samples": 5000,
+  "bootstrap_minimum_positive_fraction": 0.95
+}

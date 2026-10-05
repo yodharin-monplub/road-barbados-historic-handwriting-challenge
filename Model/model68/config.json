@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "model_number": 68,
+  "source_model": "model66",
+  "fit_policy": "outer_fold_excluded_exact_full_line_memory",
+  "minimum_support": 1,
+  "minimum_precision": 1.0,
+  "normalization": "exact_case_sensitive_prediction_string",
+  "output_root": "outputs/model68"
+}

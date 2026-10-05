@@ -1,0 +1,6 @@
+﻿Third pseudo-label round (labels from the five-member Kraken ensemble)
+complete 5-fold OOF multi_score: 0.902252
+weighted_wer 1.724068  weighted_cer 2.850343
+five-member vote using it as anchor: 0.910200
+public: 0.913737765  (previous best 0.913144555 from model130 ensemble)
+

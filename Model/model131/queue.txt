@@ -1,0 +1,5 @@
+model131/config_instruct.json 0 --predict-test
+model131/config_instruct.json 1 --predict-test
+model131/config_instruct.json 2 --predict-test
+model131/config_instruct.json 3 --predict-test
+model131/config_instruct.json 4 --predict-test

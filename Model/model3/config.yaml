@@ -1,0 +1,35 @@
+model_name: microsoft/trocr-large-handwritten
+revision: e68501f437cd2587ae5d68ee457964cac824ddee
+train_csv: data/processed/train_folds.csv
+image_dir: data/raw/images
+exclude_ids: config/known_bad_train_ids.txt
+output_dir: outputs/model3/fold{fold}
+validation_fold: 0
+seed: 20260903
+image_height: 256
+image_width: 1024
+center_fraction: 0.84
+max_label_length: 192
+training:
+  epochs: 10
+  batch_size: 1
+  eval_batch_size: 1
+  gradient_accumulation: 8
+  learning_rate: 0.00002
+  weight_decay: 0.01
+  warmup_ratio: 0.05
+  scheduler: cosine
+  logging_steps: 10
+  eval_steps: 100
+  save_steps: 100
+  save_total_limit: 2
+  workers: 2
+  bf16: true
+  fp16: false
+generation:
+  batch_size: 2
+  max_new_tokens: 192
+  num_beams: 5
+  num_return_sequences: 5
+  length_penalty: 1.0
+

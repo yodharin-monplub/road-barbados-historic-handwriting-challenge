@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "model_number": 58,
+  "source_model": "model57",
+  "fit_policy": "outer_fold_excluded_oof_prediction_truth_pairs",
+  "maximum_distance": 2,
+  "minimum_support": 2,
+  "minimum_precision": 0.6666666666666666,
+  "minimum_length": 2,
+  "output_root": "outputs/model58"
+}

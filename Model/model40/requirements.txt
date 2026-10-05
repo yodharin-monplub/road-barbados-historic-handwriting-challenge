@@ -1,0 +1,2 @@
+# Reuse the existing pinned Qwen2-VL environment; no new package is required.
+-r ../model27/requirements.txt

@@ -1,0 +1,2 @@
+# Model47 uses the exact pinned VLM stack audited by Model43.
+-r ../model43/requirements.txt

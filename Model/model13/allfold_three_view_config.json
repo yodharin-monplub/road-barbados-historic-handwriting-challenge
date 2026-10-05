@@ -1,0 +1,6 @@
+{
+  "context_weight": 1.0,
+  "score_margin": 8.0,
+  "candidate_minimum_frequency": 2,
+  "validation_multi_score": 0.8063055049164676
+}

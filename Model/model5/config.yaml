@@ -1,0 +1,44 @@
+model_name: Qwen/Qwen3-VL-4B-Instruct
+revision: ebb281ec70b05090aa6165b016eac8ec08e71b17
+train_csv: data/processed/train_folds.csv
+image_dir: data/raw/images
+exclude_ids: config/known_bad_train_ids.txt
+output_dir: outputs/model5/fold{fold}
+validation_fold: 0
+seed: 20260903
+dtype: bfloat16
+load_in_4bit: true
+gradient_checkpointing: true
+attn_implementation: sdpa
+image_variant: full
+prompt: >-
+  You are transcribing an 18th or 19th century Barbados archival crop.
+  Transcribe only the complete handwritten text on the central main line.
+  Ignore partial text from lines above or below. Return only the exact
+  transcription, with original capitalization, spelling, spaces, and punctuation.
+lora:
+  rank: 64
+  alpha: 128
+  dropout: 0.05
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+training:
+  epochs: 4
+  batch_size: 1
+  eval_batch_size: 1
+  gradient_accumulation: 16
+  learning_rate: 0.0001
+  weight_decay: 0.01
+  warmup_ratio: 0.05
+  scheduler: cosine
+  logging_steps: 10
+  eval_steps: 100
+  save_steps: 100
+  save_total_limit: 2
+  workers: 2
+generation:
+  max_new_tokens: 192
+  num_beams: 5
+  num_return_sequences: 5
+  repetition_penalty: 1.08
+  length_penalty: 1.0
+

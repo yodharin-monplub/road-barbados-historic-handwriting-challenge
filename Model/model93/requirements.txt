@@ -1,0 +1,5 @@
+# Isolated RunPod inference environment. Qwen's model card requires vLLM >=0.8.5.
+vllm==0.8.5
+transformers==4.51.3
+huggingface-hub==0.30.2
+safetensors==0.5.3

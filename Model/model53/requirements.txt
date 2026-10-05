@@ -1,0 +1,1 @@
+# CPU-only fusion. Uses only the repository's standard-library utilities.

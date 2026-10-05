@@ -1,0 +1,2 @@
+# Reuse the already installed, pinned Model27 VLM environment.
+-r ../model27/requirements.txt

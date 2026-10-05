@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "model_number": 65,
+  "source_model": "model64",
+  "fit_policy": "outer_fold_excluded_exact_boundary_insertions_refit",
+  "maximum_inserted_tokens": 2,
+  "minimum_support": 3,
+  "minimum_precision": 0.5,
+  "operation": "difflib_insert_blocks_with_exact_left_right_context",
+  "output_root": "outputs/model65"
+}

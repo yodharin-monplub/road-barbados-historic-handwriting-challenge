@@ -1,0 +1,83 @@
+schema_version: 1
+
+# Model41 is a one-variable experiment. It inherits Model39's complete broad
+# adapter/runtime contract and changes only the prompt by inserting Model32's
+# frozen, label-independent Model8 draft.
+base_model39:
+  config: model39/config.yaml
+  config_sha256: 4e8d28cdbeccd719a76a989a3de29fefbd3d72f9f444c76ec3ec6ba729479ef5
+  implementation: src/road_htr/qwen2_vl_broad.py
+  implementation_sha256: ab8d9b77154bd3c0ef8470b07310c85e6408ca4a98f72b19a7baba478da1a606
+
+base_model32_drafts:
+  config: model32/config.yaml
+  config_sha256: bedf6c4cc4401190e68f4b6094b1b1fdd431a253e21f2dbecbab98a9e3f416e1
+  implementation: src/road_htr/qwen2_vl_ocr_guided.py
+  implementation_sha256: 015c5b0a8484aa14bf4ea92c5c3890deeefef4d13e1e7d4c7602d07dce78ed68
+
+data:
+  train_csv: data/processed/train_folds.csv
+  train_csv_sha256: 1173b87f6415f657d89a13b62f4d3d84bc926e550338ad4499963c89a81a16aa
+  test_csv: data/raw/Test.csv
+  test_csv_sha256: 6cb1ecc1aa8dec912790c173be5bc8f176c14bb3c4eccee54b487ba0b2363deb
+  sample_submission: data/raw/SampleSubmission.csv
+  sample_submission_sha256: 21def37bd4c05488104707a815d972f39cc58fe2d95ee769180268cfcec0581b
+  image_dir: data/raw/images
+
+output_dir: outputs/model41/fold{fold}
+smoke_report_dir: outputs/model41/smoke
+
+# Replacement is literal rather than str.format, so OCR punctuation/braces
+# cannot create a second interpolation operation.
+prompt_template: |-
+  Transcribe only the complete handwritten text on the central main line of
+  this Barbados archival crop. Ignore partial writing from adjacent lines.
+  A separate OCR system supplied the untrusted draft between DRAFT markers.
+  Correct it using the image; copy it only where the pixels support it.
+  Return only the exact transcription. Preserve original capitalization,
+  spelling, punctuation, and repeated internal spaces.
+
+  --- DRAFT START ---
+  {draft}
+  --- DRAFT END ---
+
+draft_source:
+  kind: model8_zero_shot_unconstrained_full_view
+  receipt_schema_version: 2
+  empty_draft_policy: preserve_blank_between_markers
+  checkpoint: checkpoints/model8/medium.safetensors
+  checkpoint_sha256: 15313b51ace64cbfa81f8f6ef25ad64f04e5a6fb7f7823e67b107527bc081ac9
+  train_csv: outputs/model32/drafts/train_model8_raw.csv
+  train_receipt: outputs/model32/drafts/train_model8_raw.receipt.json
+  test_csv: outputs/model32/drafts/test_model8_raw.csv
+  test_receipt: outputs/model32/drafts/test_model8_raw.receipt.json
+
+cross_validation:
+  folds: 5
+  expected_total_rows: 4095
+  expected_train_rows_per_fold: 3276
+  expected_validation_rows_per_fold: 819
+  selection_scope: whole_fold_challenger_only
+  forbid_per_row_oracle: true
+
+sequence_preflight:
+  require_every_selected_row: true
+  max_image_tokens: 320
+  max_sequence_tokens: 512
+
+safety_assertions:
+  offline: true
+  load_in_4bit: true
+  quantization_type: nf4
+  double_quant: true
+  expected_lora_targets: 230
+  expected_trainable_parameters: 10678272
+  expected_trainable_tensors: 460
+  expected_updates_per_epoch: 205
+  expected_total_updates: 615
+  max_new_tokens: 48
+  repetition_penalty: 1.05
+  no_repeat_ngram_size: 4
+  max_allocated_gib_exclusive: 5.3
+  max_reserved_gib_exclusive: 5.3
+  preserve_internal_spaces: true

@@ -1,0 +1,6 @@
+﻿Qwen2.5-VL-7B LoRA member (third architecture family)
+complete 5-fold OOF multi_score: 0.902391  <- best single member
+per fold: 0.905972 / 0.906241 / 0.899182 / 0.904064 / 0.896492
+six-member vote including it: 0.913774  (five-member was 0.910200)
+public: 0.915406502  (submission #6, new record; previous best 0.913737765)
+

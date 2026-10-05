@@ -1,0 +1,5 @@
+LightOnOCR-2-1B full fine-tune, native resolution, 4 epochs
+complete 5-fold OOF multi_score: 0.896608
+weighted_wer 1.821211  weighted_cer 3.025931
+per fold: 0.899821 0.899198 0.895009 0.896928 0.892084
+public (5-fold vote of this member): 0.907524369

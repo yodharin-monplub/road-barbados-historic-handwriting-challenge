@@ -1,0 +1,5 @@
+Model/model141/config_gotocr2.json 0 --predict-test
+Model/model141/config_gotocr2.json 1 --predict-test
+Model/model141/config_gotocr2.json 2 --predict-test
+Model/model141/config_gotocr2.json 3 --predict-test
+Model/model141/config_gotocr2.json 4 --predict-test

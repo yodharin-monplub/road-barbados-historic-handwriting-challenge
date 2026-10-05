@@ -1,0 +1,17 @@
+{
+  "method": "diffusionpen_attention_lora",
+  "fold": 0,
+  "seed": 20260903,
+  "rank": 8,
+  "alpha": 16,
+  "steps": 200,
+  "gradient_accumulation": 4,
+  "learning_rate": 0.0001,
+  "weight_decay": 0.01,
+  "max_grad_norm": 1.0,
+  "microbatch_size": 1,
+  "bank": "outputs/model107/fold0/bank/bank.json",
+  "pilot_requests": "outputs/model108/fold0/pilot/requests.json",
+  "output_dir": "outputs/model109/fold0",
+  "notes": "Fine-tune generator attention LoRA and style projection only. Freeze CANINE, VAE and style extractor. Exclude OCR validation fold and every pilot target/style source line from generator fitting. This is generator training, not OCR training."
+}

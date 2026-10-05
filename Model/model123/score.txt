@@ -1,0 +1,2 @@
+Qwen3-VL-4B-Instruct LoRA, 3 epochs (architecture diversity member)
+fold scores approx 0.834-0.844; used only inside the Model124 vote

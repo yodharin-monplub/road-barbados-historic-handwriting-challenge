@@ -1,0 +1,4 @@
+model136/config_qwen25.json 1 --predict-test
+model136/config_qwen25.json 2 --predict-test
+model136/config_qwen25.json 3 --predict-test
+model136/config_qwen25.json 4 --predict-test

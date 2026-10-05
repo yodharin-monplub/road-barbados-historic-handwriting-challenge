@@ -1,0 +1,7 @@
+{
+  "rule": {
+    "kind": "confidence",
+    "confidence_margin": 0.0,
+    "minimum_length_ratio": 0.9
+  }
+}

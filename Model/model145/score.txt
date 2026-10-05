@@ -1,0 +1,14 @@
+Model145: Qwen3-VL-4B, vision encoder adapted (Model143 recipe) + round-4 pseudo-labels
+standalone per fold: 0.902027 / 0.899595 / 0.894205 / 0.900485 / 0.896486
+complete 5-fold OOF: 0.898561   (Model143, same model without pseudo-labels: 0.893923, +0.0046)
+
+The pseudo-label ladder was declared exhausted for the LightOnOCR member
+(Model140, +0.0004 on round 4), but it still pays on a different architecture:
++0.0046 here. "This well is dry" was true per member, not per project.
+
+ENSEMBLE (complete OOF, anchor model134_pseudo3, min_votes 2)
+  ten members (deployed, public 0.916292)   0.918854
+  eleven (+model145)                        0.919632  (+0.000778, bootstrap 99.7% positive)
+  with model146 too, model123 dropped       0.920859  <- deployed candidate, see Model146/score.txt
+Run: python Model/model122/train.py --config Model/model145/config.json --fold N --predict-test
+Host: bash Model/model146/setup_host.sh Qwen/Qwen3-VL-4B-Instruct Other/checkpoints/model123/qwen3-vl-4b-instruct

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "model_number": 57,
+  "position": "medial_token_conditioned_on_both_neighbor_cores",
+  "minimum_count": 10,
+  "minimum_ratio": 1.0,
+  "allowed_change_kinds": [
+    "case",
+    "case_and_edge_punctuation"
+  ],
+  "key": "left_current_right_ascii_alpha_core_casefold",
+  "source_model": "model56",
+  "output_root": "outputs/model57"
+}

@@ -1,0 +1,5 @@
+model134/config_pseudo3.json 0 --predict-test
+model134/config_pseudo3.json 1 --predict-test
+model134/config_pseudo3.json 2 --predict-test
+model134/config_pseudo3.json 3 --predict-test
+model134/config_pseudo3.json 4 --predict-test

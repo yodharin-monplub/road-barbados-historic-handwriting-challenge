@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "model_number": 64,
+  "source_model": "model63",
+  "fit_policy": "outer_fold_excluded_exact_replacement_spans_refit",
+  "maximum_source_tokens": 2,
+  "maximum_target_tokens": 2,
+  "minimum_support": 3,
+  "minimum_precision": 0.5,
+  "operation": "difflib_replace_blocks_only",
+  "application_order": "longest_source_first_left_to_right",
+  "output_root": "outputs/model64"
+}

@@ -1,0 +1,6 @@
+﻿Fourth pseudo-label round (labels from the six-member ensemble)
+complete 5-fold OOF multi_score: 0.902625  (round 3 was 0.902252, +0.000373)
+six-member ensemble with it as anchor: 0.913969
+SEVEN-member ensemble (both pseudo anchors): 0.914102
+public (submission #7, model140_ensemble7_candidate.csv): 0.915619140  <- NEW BEST (previous 0.915406502)
+note: the bootstrap called the CV gain non-significant, yet the public score moved in the same direction

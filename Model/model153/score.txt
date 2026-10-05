@@ -1,0 +1,46 @@
+Model153: LightOnOCR (Model140 recipe) on ROUND-5 pseudo-labels
+NEGATIVE RESULT - not deployed.
+
+Model140, the pseudo-label anchor member, was still on round-4 labels while the
+labeller had improved from 0.913774 (six-member vote) to 0.920859 (eleven-member).
+This tested whether the better labeller helps the member it originally came from.
+
+standalone per fold: 0.904580 / 0.903528 / 0.900268 / 0.904151 / 0.898494
+complete 5-fold OOF: 0.902204   (Model140 with round-4 labels: 0.902625, -0.000421)
+per fold vs Model140: -0.001197 / -0.000413 / -0.000428 / +0.001957 / -0.002018
+Four folds down, one up. A better labeller did nothing for this member either -
+the same result as Model148 (GOT-OCR2), and unlike Model145/147 (the Qwen models).
+
+ENSEMBLE (complete OOF, anchor model134_pseudo3, min_votes 2)
+  twelve pruned members (DEPLOYED, public 0.919377)  0.922499
+  thirteen (+model153)                               0.922225  (-0.000274)
+  thirteen, min_votes 3                              0.921946
+  twelve, model153 REPLACING model140                0.922187  (-0.000312)
+bootstrap thirteen vs twelve: -0.000274, 95% [-0.000830, +0.000253], 16.0% positive.
+No gain as an extra member, and no gain as a replacement.
+
+WHY THIS WAS STILL WORTH RUNNING
+Model149 showed a weaker retrained member can help through decorrelation, so the
+pattern was not obvious in advance. It fails here because Model153 and Model140
+are the same architecture AND the same recipe, differing only in label round -
+the same near-duplicate problem as Model148 and Model151. The Kraken variants got
+away with it because that member is far enough from the rest of the ensemble that
+even its own variants disagree usefully.
+
+Round-5 pseudo-labels have now been tried on four architectures:
+  Qwen3-VL-4B (Model145)  +0.0046 standalone, helped the ensemble
+  Qwen3-VL-8B (Model147)  +0.0055 standalone, helped slightly
+  GOT-OCR2    (Model148)  +0.0001 standalone, HURT the ensemble
+  LightOnOCR  (Model153)  -0.0004 standalone, no ensemble gain
+Whether pseudo-labels pay is a property of the architecture, not of the labels.
+
+cost: about 2.30 USD for five folds on the cheapest available hosts (AGENTS.md now
+asks for affordable GPUs). One host ran at 21 s/step against 2.4 s/step on the
+fastest - 7 hours instead of 50 minutes, for 1.20 USD. That trade is the one the
+user asked for and it was left alone.
+
+HOST TRAP worth recording: setup_host.sh skips image preparation when
+Data/raw/images already exists. After an interrupted upload, two hosts held a
+TRUNCATED images.tar (166 MB and 162 MB of 426 MB) and a partial image directory,
+so training started and died on the first missing file. Check the archive size,
+not just the directory's presence.

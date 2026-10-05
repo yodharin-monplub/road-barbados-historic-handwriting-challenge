@@ -1,0 +1,58 @@
+{
+  "name": "model146_qwen3vl8b_vision",
+  "base": "Other/checkpoints/model146/qwen3-vl-8b-instruct",
+  "train_csv": "Data/processed/train_folds.csv",
+  "test_csv": "Data/processed/test_ids_derived.csv",
+  "image_dir": "Data/raw/images",
+  "exclude_ids": "Other/config/known_bad_train_ids.txt",
+  "output_dir": "Other/outputs/model146_qwen3vl8b_vision",
+  "seed": 20260918,
+  "mode": "lora",
+  "target_height": 0,
+  "height_jitter": 0,
+  "longest_edge": 1540,
+  "augmentation": {
+    "enabled": true,
+    "probability": 0.9,
+    "brightness": 0.08,
+    "contrast": 0.12,
+    "rotation_degrees": 0.5,
+    "translate_y_fraction": 0.015,
+    "blur_probability": 0.15,
+    "blur_radius": 0.4
+  },
+  "epochs": 3,
+  "batch_size": 1,
+  "grad_accum": 16,
+  "lr": 0.0001,
+  "weight_decay": 0.01,
+  "warmup_ratio": 0.05,
+  "min_lr_ratio": 0.05,
+  "max_grad_norm": 1.0,
+  "gradient_checkpointing": true,
+  "eval_batch_size": 2,
+  "eval_epochs": [
+    3
+  ],
+  "final_beams": 1,
+  "max_new_tokens": 56,
+  "repetition_penalty": 1.0,
+  "workers": 6,
+  "log_steps": 5,
+  "vision_lr": 0.0001,
+  "save_model": false,
+  "conv3d_as_linear": true,
+  "family": "qwen3vl",
+  "model_class": "Qwen3VLForConditionalGeneration",
+  "processor_kwargs": {
+    "min_pixels": 200704,
+    "max_pixels": 1003520
+  },
+  "prompt": "Transcribe the handwritten line exactly, preserving capitalization, spelling and punctuation.",
+  "lora": {
+    "rank": 32,
+    "alpha": 64,
+    "dropout": 0.05,
+    "target_modules": ".*\\.(q_proj|k_proj|v_proj|o_proj|gate_proj|up_proj|down_proj|attn\\.qkv|attn\\.proj|linear_fc1|linear_fc2)$"
+  }
+}

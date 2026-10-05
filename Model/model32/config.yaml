@@ -1,0 +1,70 @@
+schema_version: 1
+
+# Model32 intentionally inherits every architecture, quantization, LoRA,
+# optimizer, image-token, generation, and VRAM gate from this immutable
+# Model27 snapshot. The loader hashes both files before accepting the reuse.
+base_model27:
+  config: model27/config.yaml
+  config_sha256: ef6df3f4c81451abc55c5a4d9ec4d5ad8667dddbebf224d56b93c00651087caa
+  implementation: src/road_htr/qwen2_vl_challenger.py
+  implementation_sha256: 148b39afac28d78de32f68acabc590a5cd885465820171c2d0efc2e2d862ee12
+
+data:
+  train_csv: data/processed/train_folds.csv
+  train_csv_sha256: 1173b87f6415f657d89a13b62f4d3d84bc926e550338ad4499963c89a81a16aa
+  test_csv: data/raw/Test.csv
+  test_csv_sha256: 6cb1ecc1aa8dec912790c173be5bc8f176c14bb3c4eccee54b487ba0b2363deb
+  sample_submission: data/raw/SampleSubmission.csv
+  sample_submission_sha256: 21def37bd4c05488104707a815d972f39cc58fe2d95ee769180268cfcec0581b
+  image_dir: data/raw/images
+
+output_dir: outputs/model32/fold{fold}
+smoke_report_dir: outputs/model32/smoke
+
+# The draft is explicitly marked as untrusted. Replacement is literal rather
+# than str.format, so braces emitted by OCR cannot alter the template.
+prompt_template: |-
+  Transcribe only the complete handwritten text on the central main line of
+  this Barbados archival crop. Ignore partial writing from adjacent lines.
+  A separate OCR system supplied the untrusted draft between DRAFT markers.
+  Correct it using the image; copy it only where the pixels support it.
+  Return only the exact transcription. Preserve original capitalization,
+  spelling, punctuation, and repeated internal spaces.
+
+  --- DRAFT START ---
+  {draft}
+  --- DRAFT END ---
+
+draft_source:
+  kind: model8_zero_shot_unconstrained_full_view
+  # Receipt v2 explicitly binds genuine blank OCR outputs. A present empty
+  # string stays blank between the DRAFT markers; missing rows still fail.
+  receipt_schema_version: 2
+  empty_draft_policy: preserve_blank_between_markers
+  generator_config: model32/model8_draft_config.yaml
+  generator_config_sha256: c50ad5129ceea4e3232e515b2a5f4ad6e5fab03731349709adba435ef07a3af4
+  generator_implementation: src/road_htr/kraken_cli.py
+  generator_implementation_sha256: 50519a5a354b6c76b41822b93a6729b7399db30a30d14e6a77530b809d726d41
+  checkpoint: checkpoints/model8/medium.safetensors
+  checkpoint_sha256: 15313b51ace64cbfa81f8f6ef25ad64f04e5a6fb7f7823e67b107527bc081ac9
+  train_csv: outputs/model32/drafts/train_model8_raw.csv
+  train_receipt: outputs/model32/drafts/train_model8_raw.receipt.json
+  test_csv: outputs/model32/drafts/test_model8_raw.csv
+  test_receipt: outputs/model32/drafts/test_model8_raw.receipt.json
+
+cross_validation:
+  folds: 5
+  selection_scope: whole_fold_report_only
+  forbid_per_row_oracle: true
+
+# These are duplicated as assertions, not tunable overrides. Model32 refuses
+# to start if the inherited Model27 values differ.
+safety_assertions:
+  offline: true
+  load_in_4bit: true
+  quantization_type: nf4
+  double_quant: true
+  expected_lora_targets: 58
+  max_allocated_gib_exclusive: 5.3
+  max_reserved_gib_exclusive: 5.3
+  preserve_internal_spaces: true

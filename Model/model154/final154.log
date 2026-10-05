@@ -1,0 +1,35 @@
+m154 fold0: DONE oof_ep10_greedy.csv oof_ep10_greedy.jsonl test_beam1.csv test_beam1.jsonl 
+m154 fold1: DONE oof_ep10_greedy.csv oof_ep10_greedy.jsonl test_beam1.csv test_beam1.jsonl 
+m154 fold2: DONE oof_ep10_greedy.csv oof_ep10_greedy.jsonl test_beam1.csv test_beam1.jsonl 
+m154 fold3: DONE oof_ep10_greedy.csv oof_ep10_greedy.jsonl test_beam1.csv test_beam1.jsonl 
+m154 fold4: DONE oof_ep10_greedy.csv oof_ep10_greedy.jsonl test_beam1.csv test_beam1.jsonl 
+model154 alone                            "ensemble": 0.838563118598885,
+12 pruned (deployed, public .919377)      "ensemble": 0.9224986529610719,
+13 (+model154)                            "ensemble": 0.9226773377938059,
+13, min_votes 3                           "ensemble": 0.9224145364335173,
+== bootstrap w13 vs 12
+base 0.922499  candidate 0.922677  gain +0.000179
+bootstrap 95% [-0.000250, +0.000626]  positive 79.7%
+== bootstrap w13m3 vs 12
+base 0.922499  candidate 0.922415  gain -0.000084
+bootstrap 95% [-0.000576, +0.000433]  positive 36.2%
+== member selection with TrOCR available
+=== PART 1: selection on the complete OOF (optimistic)
+all-folds: start 13 members, 0.922677
+all-folds: drop model150_kraken_pseudo4            -> 0.922685 (+0.000008)
+all-folds: final 12 members, 0.922685
+kept: model134_pseudo3 model140_pseudo4 model122_prod_lora model130_kraken model136_qwen25vl7b model143_qwen3vl4b_vision model144_qwen25vl7b_vision model145_qwen3vl4b_vision_pseudo4 model146_qwen3vl8b_vision model147_qwen3vl8b_pseudo5 model149_kraken_pseudo5 model154_trocr
+
+=== PART 2: selection on folds 0-3, scored on held-out fold 4
+folds0-3: start 13 members, 0.923352
+folds0-3: final 13 members, 0.923352
+kept: model134_pseudo3 model140_pseudo4 model122_prod_lora model130_kraken model136_qwen25vl7b model143_qwen3vl4b_vision model144_qwen25vl7b_vision model145_qwen3vl4b_vision_pseudo4 model146_qwen3vl8b_vision model147_qwen3vl8b_pseudo5 model149_kraken_pseudo5 model150_kraken_pseudo4 model154_trocr
+
+held-out fold 4: deployed 12 = 0.920565
+held-out fold 4: part-2 subset = 0.919984
+held-out fold 4: all 13        = 0.919984
+  "rows": 1374,
+  "recovered_blank": 0,
+  "sha256": "ce4295e19f9a0f186b7b0113fe17570328bbfcfb5510725e28ab791525312936",
+test lines changed vs the deployed twelve: 33 of 1375
+FINAL154_DONE

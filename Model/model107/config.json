@@ -1,0 +1,14 @@
+{
+  "fold": 0,
+  "seed": 20260903,
+  "truth": "data/processed/train_folds.csv",
+  "image_dir": "data/raw/images",
+  "exclude_ids": "config/known_bad_train_ids.txt",
+  "checkpoint": "outputs/model22/checkpoint_evaluation/fold0/converted/checkpoint_07-0.9209.safetensors",
+  "training_manifest": "outputs/model22/fold0/run_manifest.json",
+  "conversion_receipt": "outputs/model22/checkpoint_evaluation/fold0/converted/checkpoint_07-0.9209.conversion.json",
+  "min_character_confidence": 0.5,
+  "min_word_confidence": 0.95,
+  "space_height_fraction": 0.15,
+  "max_aspect_ratio": 36
+}

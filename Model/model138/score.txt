@@ -1,0 +1,7 @@
+﻿GRPO against the competition metric - REJECTED (fold-0 gate failed)
+supervised start 0.901960
+step 25  0.902076  (+0.000117)
+step 50  0.901427  (-0.000533)
+step 75  0.900793  (-0.001167)
+required +0.002; 83% of sampled groups had zero reward variance (no signal)
+cost ~1 USD of the authorized 4 USD

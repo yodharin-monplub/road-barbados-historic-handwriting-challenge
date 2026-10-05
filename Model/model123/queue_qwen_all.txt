@@ -1,0 +1,5 @@
+model123/config_lora.json 0 --predict-test
+model123/config_lora.json 1 --predict-test
+model123/config_lora.json 2 --predict-test
+model123/config_lora.json 3 --predict-test
+model123/config_lora.json 4 --predict-test

@@ -1,0 +1,61 @@
+model_name: lightonai/LightOnOCR-2-1B-base
+revision: c1bc8eb6625be7b34178ff53481b242f7b8ffcb8
+license: Apache-2.0
+local_path: checkpoints/model73/lightonocr-2-1b-base
+local_files_only: true
+model_class: LightOnOcrForConditionalGeneration
+processor_class: LightOnOcrProcessor
+fix_mistral_regex: true
+train_csv: data/processed/train_folds.csv
+image_dir: data/raw/images
+exclude_ids: config/known_bad_train_ids.txt
+output_dir: outputs/model77/{fold}
+validation_fold: null
+seed: 20260903
+dtype: bfloat16
+load_in_4bit: false
+gradient_checkpointing: true
+image_variant: full
+prompt: ""
+lora:
+  rank: 64
+  alpha: 128
+  dropout: 0.05
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+training:
+  epochs: 2
+  max_steps: 500
+  batch_size: 8
+  eval_batch_size: 8
+  gradient_accumulation: 2
+  learning_rate: 0.0001
+  weight_decay: 0.01
+  warmup_ratio: 0.05
+  scheduler: cosine
+  logging_steps: 10
+  eval_steps: 100
+  save_steps: 500
+  save_total_limit: 1
+  workers: 2
+generation:
+  max_new_tokens: 64
+  num_beams: 1
+  num_return_sequences: 1
+  repetition_penalty: 1.05
+  length_penalty: 1.0
+expected_files_sha256:
+  .gitattributes: 5c07eeea89802ab6212aac209440c1f5ef8e0172dd885f18b5ec6912e255ceb3
+  README.md: 9d7830dde349bbefd5720bbfb5ccbed173b18634a32f4f47b914ff35cde035fd
+  added_tokens.json: c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680
+  benchmark.png: 588f08c83690be0564e0275a369911b17fae02c4bfaac46a243323bd4efe23b8
+  chat_template.jinja: 0942a43ee0ba48a608814e0b40ac9cb70bcc29ea72f19c84b1bf2597f05aa2bd
+  config.json: 43b62f9ec0a7207f67fd032f7ef9719fa8b6b44d7b3cf20fbc2346329493ff3a
+  generation_config.json: 7d2566b271454af41e9ebc28851888e1ec7ca33a53fe644dac207856df952981
+  lightonocr-banner.png: e32c44dc131d4e07b344a41bb9651eb97ce4ce73d4e78463821267467810462c
+  merges.txt: 8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5
+  model.safetensors: ac7dee24080b79e89503cec942f7500c04f2b2dd2e7f4d50000ae0ad41578438
+  processor_config.json: 5292a61a089835ec6884836e3896bba1fc571c60df872e3ca9eb45bd3288910d
+  special_tokens_map.json: 76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd
+  tokenizer.json: f54b55fa0c3aba0c91ce09ea79ae4e62da24e2a1a630f96c4bae34aba25e234a
+  tokenizer_config.json: 31f5876fbfe2bba0d931d540b84f4ffa03eb7c364d31858c38d1bf2c2fff97f3
+  vocab.json: ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910

@@ -1,0 +1,33 @@
+Model146: Qwen3-VL-8B-Instruct (apache-2.0), vision encoder adapted, no pseudo-labels
+Same recipe as Model143 except batch 1 x grad_accum 16 (19.4 GiB of 24 on an RTX 3090).
+232 trainable vision tensors (27 blocks x 4 x 2 + merger + 3 deepstack mergers).
+
+standalone per fold: 0.902738 / 0.900926 / 0.895637 / 0.902060 / 0.895817
+complete 5-fold OOF: 0.899437
+
+ENSEMBLE (complete OOF, anchor model134_pseudo3, min_votes 2)
+  ten members (deployed, public 0.916292)            0.918854
+  eleven (+model145)                                 0.919632
+  eleven (+model146)                                 0.920123
+  twelve (+both)                                     0.920284
+  ELEVEN, both added and model123 DROPPED            0.920859  <- BEST, deployed candidate
+  eleven, both added, model136 dropped instead       0.919408
+  ten, both added, model123 and model136 dropped     0.919748
+  eleven (best) min_votes 3 variant                  0.919901
+bootstrap best vs deployed ten (3,000): +0.002005, 95% [+0.001298, +0.002687], 100% positive
+bootstrap best vs all-twelve: +0.000558, 95% [+0.000080, +0.001035], 99.0% positive
+
+Dropping Model123 helps because Model143/145 are the same base model with the
+vision encoder actually trained - it was the superseded copy, not a diverse one.
+Dropping Model136 does NOT help (-0.000876): Model144 is its fixed twin, yet the
+pair still disagree usefully. Superseded does not automatically mean redundant;
+measure each one.
+
+candidate: Other/submissions/model146_ensemble11_candidate.csv
+  65 of 1374 test lines differ from the deployed ten-member submission
+  sha256 4e1296349b4c13a53f05ccce43e9583d44623e695cb47eb37c702e7559198b20
+public: not yet submitted
+
+cost: about 9.45 USD for eight folds (Model145 f1-4 and Model146 f1-4) on eight
+rented RTX 3090s, 4-5.5 h each at 0.18-0.27 USD/h. Three of eleven rented hosts
+were dead on arrival (one GPU fault, two with no SSH) and were replaced.

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "outer_fold": 0,
+  "expected_truth_rows": 4095,
+  "expected_fold_rows": 819,
+  "calibration_bins": 10,
+  "reference_seed": "model33-selector-v1",
+  "reference_variant": "full_reference",
+  "expected_reference_score": 0.8421451412878189,
+  "reference_score_tolerance": 1e-10,
+  "partition_seeds": [
+    "model33-selector-v1",
+    "model38-audit-salt-01",
+    "model38-audit-salt-02",
+    "model38-audit-salt-03"
+  ],
+  "variants": [
+    {"name": "full_reference", "feature_set": "all", "logistic_l2": 0.08},
+    {"name": "compact", "feature_set": "compact", "logistic_l2": 0.08}
+  ],
+  "expected_model33_config": {
+    "single_fold_inner_splits": 5,
+    "nested_lm_splits": 5,
+    "seed": "model33-selector-v1",
+    "char_order": 4,
+    "lm_alpha": 0.25,
+    "logistic_epochs": 900,
+    "logistic_learning_rate": 0.035,
+    "logistic_l2": 0.08,
+    "minimum_scale": 1e-06
+  },
+  "artifacts": {
+    "truth": {
+      "path": "data/processed/train_folds.csv",
+      "sha256": "1173b87f6415f657d89a13b62f4d3d84bc926e550338ad4499963c89a81a16aa"
+    },
+    "candidate_a": {
+      "path": "outputs/model25/allfold_oof.csv",
+      "sha256": "99ae115570e44a249641551143f2134458c44039d59595cb291f09cb3b1b7251"
+    },
+    "details_a": {
+      "path": "outputs/model8/allfold_full_constrained.jsonl",
+      "sha256": "d6b4eee27d97c826362fc44821a47d5ea65475ba711929e21999c28a2f3a0113"
+    },
+    "candidate_b": {
+      "path": "outputs/model22/checkpoint_evaluation/fold0/predictions/checkpoint_07-0.9209.csv",
+      "sha256": "502634e084ba5cce9f28e7de71db5bf06f20c7587c6dac831c48b2940fac37ee"
+    },
+    "details_b": {
+      "path": "outputs/model22/checkpoint_evaluation/fold0/predictions/checkpoint_07-0.9209.jsonl",
+      "sha256": "daf37d8001d67e031ec0aebd3ec028a2a1ca369e36c8c8414d6263ef903cbbf4"
+    },
+    "model33_config": {
+      "path": "model33/config.json",
+      "sha256": "3ff9cfaa9befb36cf3d7a71f5f677d551a9f027e17c0a671ee52e43ac0e08de3"
+    },
+    "model33_source": {
+      "path": "src/road_htr/crossfit_candidate_selector.py",
+      "sha256": "b0b16d65717d62952c936d1fd7499b26d4ea5dddccce2d234cb96e15b9a81d18"
+    }
+  }
+}

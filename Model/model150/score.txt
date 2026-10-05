@@ -1,0 +1,34 @@
+Model150: the Kraken/PP-OCRv6 CTC member with ROUND-4 pseudo-labels
+A third CTC variant, run purely for decorrelation after Model149 showed that a
+Kraken retrained on different data helps the vote even when it is not better.
+Same Model22 recipe and fixed epoch 7; only the label set differs.
+
+complete 5-fold OOF: 0.806886
+  Model130 (no pseudo-labels)   0.805866
+  Model149 (round-5 labels)     0.804717
+  Model150 (round-4 labels)     0.806886  <- best of the three, by 0.001
+The three Kraken variants sit within 0.002 of each other: for this member the
+label set is nearly irrelevant to its own score, which is what makes it a cheap
+source of decorrelated votes.
+
+ENSEMBLE (complete OOF, anchor model134_pseudo3, min_votes 2)
+  thirteen members (Model149 candidate)   0.921716
+  FOURTEEN (+model150)                    0.922014  (+0.000298)  <- BEST CV
+  fourteen, min_votes 3                   0.921790
+  thirteen, model150 replacing model130   0.921760  (+0.000044)
+bootstrap fourteen vs thirteen: +0.000298, 95% [-0.000151, +0.000757], 90.4% positive
+Not significant. It is deployed on the Model140 precedent (a +0.00033 CV gain the
+bootstrap could not confirm still moved the public score) and because three
+Kraken variants outvoting each other is exactly the decorrelation the ensemble pays for.
+
+Returns per round are flattening: +0.0017 (Model147 era), +0.00044 (Model149),
++0.00030 (Model150). All three Kraken variants are now in; a fourth would cost
+about 3 USD for a gain that the bootstrap would almost certainly not confirm.
+
+candidate: Other/submissions/model150_ensemble14_candidate.csv
+  31 of 1374 test lines differ from the thirteen-member candidate
+  sha256 90b11b83e595e9435090a172404abe73fa52805161e07b1430f0b49f195d329d
+public: 0.918264019  <- NEW BEST (previous 0.916291517, +0.001972)
+CV +0.003160 for public +0.001972: the best CV-to-public transfer of the run (Model143 step: 0.07, Model144 step: 0.26, this step: 0.62)
+
+cost: about 2.06 USD for five folds. Traps and host setup: Model149/readme.txt.

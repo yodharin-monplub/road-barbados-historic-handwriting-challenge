@@ -1,0 +1,16 @@
+Qwen3-VL-4B LoRA with the vision encoder ACTUALLY adapted (Model123 had it frozen)
+standalone per fold: 0.899727 / 0.894859 / 0.890676 / 0.896532 / 0.887818
+complete 5-fold OOF: 0.893923   (Model123, vision frozen: ~0.838)
+ensembles, complete OOF, anchor model134_pseudo3, min_votes 2:
+  eight members (Model141 candidate)          0.914857
+  NINE members (+model143)                    0.917124  (+0.002267)  <- NEW BEST CV
+  nine members, min_votes 3                   0.915636
+  eight, model143 replacing model123          0.916448  (+0.001591)
+bootstrap 9 vs 8 (3,000): 95% [+0.001570, +0.003027], 100.0% positive
+vs submission #7 (0.914150): +0.002974
+candidate: Other/submissions/model143_ensemble9_candidate.csv
+  37 test lines differ from #7, 30 from the eight-member candidate
+  sha256 6bda84275ca0fef1350266ea3ada437db705a76ca2439fd45ee8917810490cec
+public: 0.915838876  <- NEW BEST (submission #7 was 0.915619140, +0.000220)
+note: the CV gain over #7 was +0.002974, the public gain is +0.000220 - public
+follows CV in direction but at under a tenth of the size.

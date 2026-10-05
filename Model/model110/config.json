@@ -1,0 +1,19 @@
+{
+  "method": "diffusionpen_paragraph",
+  "fold": 0,
+  "seed": 20260908,
+  "vocabulary_size": 384,
+  "styles": 4,
+  "generation_batch_size": 8,
+  "diffusion_steps": 50,
+  "synthetic_lines": 819,
+  "words_per_line": 12,
+  "lines_per_paragraph": 3,
+  "min_style_vocabulary": 50,
+  "word_filter": "at_least_one_frozen_OCR_exact_match",
+  "truth": "data/processed/train_folds.csv",
+  "crop_bank": "outputs/model107/fold0/bank/bank.json",
+  "generator_assets": "checkpoints/model108/asset_manifest.json",
+  "output_dir": "outputs/model110/fold0",
+  "notes": "New passages from a training-only word bigram model. All handwriting pixels synthesized by pretrained DiffusionPen. Preserve exact historical tokens. No external paragraphs, dictionaries, test/validation data or manual edits. OCR checks are noisy filters; real heldout OCR validation decides value."
+}

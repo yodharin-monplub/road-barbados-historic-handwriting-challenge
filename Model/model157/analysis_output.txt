@@ -1,0 +1,59 @@
+﻿5472
+rows 4095  ensemble OOF score 0.922499  total loss 0.077501
+rows with any error: 2762
+image sizes read: 4095  median height 65px
+
+CATEGORY (rows can be in several)            rows  w/err  loss share  max gain if perfect
+  tall crop (>= 1.8x median height: likely multi-line)  1102    927    40.78%    +0.03160
+  near miss (1-2 char edits)                            1489   1489    31.95%    +0.02476
+  target contains superscript marker ^                   688    543    23.74%    +0.01840
+  target contains digits                                 217    152     6.84%    +0.00530
+  long line (>= 90 chars)                                 88     65     3.90%    +0.00302
+  in community_reported_suspect_ids                       18     16     2.36%    +0.00183
+  prediction <= 0.67x target length (truncated)            5      5     1.01%    +0.00079
+  low aspect ratio (< 6: likely multi-line)                6      6     0.44%    +0.00034
+
+TOP 40 rows hold 6.28% of all loss
+  (reference/predicted text removed: competition data; rerun with --show-text locally)
+  VmrEALeZiP1Y6nF9  5520x315 loss 0.000356 ec  64
+  yNyf3Tp0zc7DFj5F  5453x379 loss 0.000225 ec  27
+  mfQxfOmeRmwBh0g8    603x53 loss 0.000181 ec  34
+  3ZxOeKcOr5wUYyk0    392x70 loss 0.000165 ec  19
+  PJbM7Q1SrblrSWt6  1143x107 loss 0.000164 ec  28
+  t0UrASljcgzvBAnO  5186x425 loss 0.000147 ec  21
+  JU7lRwk3jKkus24Z  3882x222 loss 0.000143 ec  34
+  DY1VIAVi8Malugvm  5540x397 loss 0.000136 ec  26
+  JkquVmebUGfiqzt5  5140x253 loss 0.000128 ec  19
+  Td1i9ewd7Pgn4q12  5460x381 loss 0.000124 ec  15
+  xfH9BNTuAZfoQtrd  4870x361 loss 0.000120 ec  29
+  WwlTCykxjP3c4kfo  5619x507 loss 0.000119 ec  17
+  szL6TXahFyngWMfK  4788x293 loss 0.000118 ec   6
+  PuDCCRnGEY59YVkQ   1121x64 loss 0.000114 ec  11
+  W8wdFrxaW9VMnV3p  4737x303 loss 0.000113 ec  13
+  rat7Ymfb6NaDEgQJ  5124x422 loss 0.000113 ec  19
+  u5k0ujRTojrpqSjg  4661x324 loss 0.000112 ec  18
+  8mnOUvSE5RObkS5q  5630x382 loss 0.000111 ec  12
+  ToCVujlK1zVrHqOi  5740x382 loss 0.000109 ec   9
+  z0QbEkIoiVzYZ2Is   1146x52 loss 0.000106 ec   7
+  8lGd2LO84KMYDbiq  5650x372 loss 0.000106 ec  12
+  VPBr1xiRUv4EDCwX   1062x63 loss 0.000105 ec  11
+  VfA8Rllc17Tz2PUR  5634x433 loss 0.000104 ec  17
+  4f0oEdScUSTeQSDr  1244x108 loss 0.000103 ec  25
+  Jz4fqVSNJsjxc2DN  5738x353 loss 0.000102 ec   9
+  7gsNzoZwubfLnxn5  5167x338 loss 0.000102 ec  13
+  qM5q4bWpR7YWPR6N  4731x360 loss 0.000101 ec  12
+  Yy1NKXy9jbHmOrFK    742x91 loss 0.000100 ec  20
+  wh4zzfKbF4zqtr5M  1262x118 loss 0.000099 ec  14
+  l3cmgFmgcKP1yQFH   1124x66 loss 0.000098 ec  17
+  tBL3M2yCnog2fATC   1096x74 loss 0.000095 ec   9
+  18UjwtvDYnHEwEgC   1022x48 loss 0.000095 ec  10
+  uMfcaTr1qmzq4nzr  5619x322 loss 0.000095 ec   9
+  SJoB7R0aR9KOtnHA  4680x271 loss 0.000095 ec  13
+  SQGRLf6d6wY0rI5X  2797x246 loss 0.000094 ec  12
+  PgDdVwXzrDO3RBVv    752x94 loss 0.000094 ec  18
+  6I0TMTkE9dURrDlm  5549x393 loss 0.000094 ec  16
+  jQHoAtrdJ8L4V6lO   1069x51 loss 0.000094 ec  17
+  AoupA6Uur0eKxhGR   1074x53 loss 0.000093 ec  11
+  OSYQZaQGaaTqO8wG  3855x317 loss 0.000093 ec  11
+
+concentration: worst 10% of rows = 34.1% of loss

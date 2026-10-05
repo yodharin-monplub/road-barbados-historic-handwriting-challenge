@@ -1,0 +1,4 @@
+﻿Forum review and label audit - no exploitable finding
+external data: forbidden by the organizer (discussion 34734)
+rows with a label-error signature: 1 of 4095
+abbreviation-expansion convention: 4 rows, 0.06% of word error

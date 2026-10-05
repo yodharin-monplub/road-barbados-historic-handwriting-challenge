@@ -1,0 +1,38 @@
+TRAIN ROW AUDIT — 2026-09-03
+
+Source
+------
+The 21 IDs were publicly reported in Zindi discussion 33891. Zindi permits
+fully documented removal of clearly corrupted training samples while retaining
+the supplied data unchanged.
+
+Excluded
+--------
+79tMUVyfIdy3GzkG  Nearly blank crop; the supplied transcription is not visible.
+F8DYDDp2AvW9Dytw  Visible line and supplied transcription are unrelated.
+rh8o7bdCGOIBFPwH  Supplied transcription skips most of the visible single line.
+
+Retained after visual verification
+----------------------------------
+0CCrVKAom8EK53jj
+3ZxOeKcOr5wUYyk0
+8H2ITJSWZhAD6eh0
+EcxuqKeZl7OQexfB
+JU7lRwk3jKkus24Z
+KH5g92Q3DA5Bo6xi
+MfT9S5oghk9ywNSC
+N78M3v6GKmUzF7sk
+PJbM7Q1SrblrSWt6
+PO7QQLWIFOT65BTz
+R6iYPb7MHFiHtXH6
+VmrEALeZiP1Y6nF9
+WwlTCykxjP3c4kfo
+baTY3OlGskirWgFc
+mfQxfOmeRmwBh0g8
+t0UrASljcgzvBAnO
+u3b4JNo5bqpfE7Js
+yNyf3Tp0zc7DFj5F
+
+These retained rows are atypical (multi-line crops, marks, damaged paper, or
+wide archival strips) but their supplied transcriptions visibly align. No
+transcription was edited or replaced.

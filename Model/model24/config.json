@@ -1,0 +1,6 @@
+{
+  "minimum_count": 1,
+  "minimum_ratio": 0.5,
+  "normalization": "remove_caret_only",
+  "action": "insert_dominant_caret_variant_only"
+}

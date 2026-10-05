@@ -1,0 +1,5 @@
+{
+  "context_weight": 2.0,
+  "score_margin": 10.0,
+  "candidate_minimum_frequency": 2
+}

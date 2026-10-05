@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "checkpoint_epoch_zero_based": 7,
+  "checkpoint_policy": "fixed_zero_based_epoch_7_selected_once_on_fold0",
+  "terminal_stage": "confusions",
+  "terminal_stage_index": 3,
+  "selection_fold": 0,
+  "selection_score": 0.8469416064981798,
+  "selection_status": "frozen_before_training_or_scoring_folds_1_through_4",
+  "decision_date": "2026-09-03",
+  "notes": "Apply the identical context -> boundaries -> confusions recipe sequence to folds 1-4. Do not choose a terminal stage independently per fold. The fold-0 selection score is conditional development evidence, not a five-fold OOF claim."
+}

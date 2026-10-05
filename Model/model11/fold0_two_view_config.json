@@ -1,0 +1,9 @@
+{
+  "minimum_frequency": 2,
+  "context_weight": 16.0,
+  "distance_penalty": 64.0,
+  "fallback_frequency": 5,
+  "two_edit_min_length": 6,
+  "seed_minimum_frequency": 3,
+  "seed_ambiguity_ratio": 1.0
+}

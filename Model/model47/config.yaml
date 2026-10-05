@@ -1,0 +1,108 @@
+schema_version: 1
+
+# Model47 composes finalized Model43 with Model32's one canonical, label-free
+# raw Model8 draft producer. These dependencies are byte-pinned and immutable.
+base_model43:
+  config: model43/config.yaml
+  config_sha256: deb30c37d4362917b30b7e3f03284e40062c05824c0132ab948a135813762e94
+  implementation: src/road_htr/qwen2_vl_starter_highres.py
+  implementation_sha256: 4da6449f5a4241deaa803305b53013480012717d0ff1b54100da2d7eb89aebda
+
+base_model32_drafts:
+  config: model32/config.yaml
+  config_sha256: bedf6c4cc4401190e68f4b6094b1b1fdd431a253e21f2dbecbab98a9e3f416e1
+  implementation: src/road_htr/qwen2_vl_ocr_guided.py
+  implementation_sha256: 015c5b0a8484aa14bf4ea92c5c3890deeefef4d13e1e7d4c7602d07dce78ed68
+  producer: model32/prepare_drafts.py
+  producer_sha256: da2a76aa94db0be8ba46c574c4423ecb668b284f5d47aa09531bedb7952c47dd
+
+data:
+  train_csv: data/processed/train_folds.csv
+  train_csv_sha256: 1173b87f6415f657d89a13b62f4d3d84bc926e550338ad4499963c89a81a16aa
+  test_csv: data/raw/Test.csv
+  test_csv_sha256: 6cb1ecc1aa8dec912790c173be5bc8f176c14bb3c4eccee54b487ba0b2363deb
+  sample_submission: data/raw/SampleSubmission.csv
+  sample_submission_sha256: 21def37bd4c05488104707a815d972f39cc58fe2d95ee769180268cfcec0581b
+  image_dir: data/raw/images
+
+output_dir: outputs/model47/fold{fold}
+smoke_report_dir: outputs/model47/smoke
+
+# Replacement is literal, not str.format. The raw OCR string remains clearly
+# delimited and is never treated as truth or selected per row against labels.
+prompt_template: |-
+  Transcribe EXACTLY as seen. Preserve line breaks, punctuation, and spacing.
+  Do not add explanations. Return verbatim transcription. No paraphrasing. No
+  normalization. The raw OCR draft below is untrusted. Correct it using the
+  image; copy it only where the pixels support it.
+
+  --- UNTRUSTED DRAFT START ---
+  {draft}
+  --- UNTRUSTED DRAFT END ---
+
+draft_source:
+  kind: model8_zero_shot_unconstrained_full_view
+  receipt_schema_version: 2
+  empty_draft_policy: preserve_blank_between_markers
+  checkpoint: checkpoints/model8/medium.safetensors
+  checkpoint_sha256: 15313b51ace64cbfa81f8f6ef25ad64f04e5a6fb7f7823e67b107527bc081ac9
+  train_csv: outputs/model32/drafts/train_model8_raw.csv
+  train_receipt: outputs/model32/drafts/train_model8_raw.receipt.json
+  test_csv: outputs/model32/drafts/test_model8_raw.csv
+  test_receipt: outputs/model32/drafts/test_model8_raw.receipt.json
+
+draft_limits:
+  max_utf8_bytes: 160
+  max_qwen_tokens: 160
+  byte_fallback_boundary_allowance: 16
+  reject_chat_control_substrings: ["<|", "|>"]
+  # A present receipt-v2 blank is valid raw OCR; a missing row still fails.
+  require_nonempty: false
+  literal_replacement: true
+
+cross_validation:
+  folds: 5
+  expected_total_rows: 4095
+  expected_train_rows_per_fold: 3276
+  expected_validation_rows_per_fold: 819
+  selection_scope: whole_fold_challenger_only
+  forbid_per_row_oracle: true
+
+# Model43's 1152/1200 caps cannot conservatively hold the guided scaffold plus
+# every permitted draft. Model47 alone raises the envelopes; Qwen's pinned
+# context is 32768 and the real 5.3 GiB smoke remains mandatory.
+sequence_envelope:
+  inherited_training_cap: 1152
+  inherited_generation_context_cap: 1200
+  configured_training_cap: 1344
+  configured_generation_context_cap: 1392
+  model_context_cap: 32768
+  min_effective_image_tokens: 896
+  max_image_tokens: 1024
+  max_new_tokens: 48
+  require_byte_fallback_proof: true
+  require_receipted_all_row_tokenizer_audit: true
+  require_receipted_all_row_processor_preflight: true
+
+safety_assertions:
+  offline: true
+  load_in_4bit: true
+  quantization_type: nf4
+  double_quant: true
+  visual_tower_frozen: true
+  merger_frozen: true
+  expected_lora_targets: 196
+  expected_trainable_parameters: 18464768
+  expected_trainable_tensors: 392
+  batch_size: 1
+  gradient_accumulation: 16
+  epochs: 3
+  learning_rate: 0.00003
+  expected_updates_per_epoch: 205
+  expected_total_updates: 615
+  max_new_tokens: 48
+  repetition_penalty: 1.05
+  no_repeat_ngram_size: 4
+  max_allocated_gib_exclusive: 5.3
+  max_reserved_gib_exclusive: 5.3
+  preserve_internal_spaces: true

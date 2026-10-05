@@ -1,0 +1,38 @@
+train_csv: data/processed/train_folds.csv
+image_dir: data/raw/images
+exclude_ids: config/known_bad_train_ids.txt
+output_dir: outputs/model4/fold{fold}
+validation_fold: 0
+seed: 20260903
+image_height: 96
+max_width: 2048
+center_fraction: 0.84
+architecture:
+  hidden_size: 384
+  lstm_layers: 3
+  dropout: 0.2
+augmentation:
+  line_mix_probability: 0.25
+training:
+  epochs: 80
+  batch_size: 8
+  eval_batch_size: 12
+  gradient_accumulation: 2
+  learning_rate: 0.0008
+  min_learning_rate: 0.000001
+  weight_decay: 0.01
+  clip_norm: 5.0
+  patience: 12
+  workers: 4
+  bf16: true
+decoder:
+  mode: beam
+  batch_size: 12
+  beam_width: 32
+  token_prune: 24
+  nbest: 8
+  lm_order: 5
+  lm_smoothing: 0.2
+  lm_alpha: 0.35
+  space_bonus: 0.0
+

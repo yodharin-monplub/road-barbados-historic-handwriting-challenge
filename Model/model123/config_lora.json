@@ -1,0 +1,66 @@
+{
+  "name": "model123_qwen3vl4b_lora",
+  "base": "Other/checkpoints/model123/qwen3-vl-4b-instruct",
+  "train_csv": "Data/processed/train_folds.csv",
+  "test_csv": "Data/processed/test_ids_derived.csv",
+  "image_dir": "Data/raw/images",
+  "exclude_ids": "Other/config/known_bad_train_ids.txt",
+  "output_dir": "Other/outputs/model123_qwen3vl4b_lora",
+  "seed": 20260918,
+  "mode": "lora",
+  "target_height": 0,
+  "height_jitter": 0,
+  "longest_edge": 1540,
+  "augmentation": {
+    "enabled": true,
+    "probability": 0.9,
+    "brightness": 0.08,
+    "contrast": 0.12,
+    "rotation_degrees": 0.5,
+    "translate_y_fraction": 0.015,
+    "blur_probability": 0.15,
+    "blur_radius": 0.4
+  },
+  "epochs": 3,
+  "batch_size": 2,
+  "grad_accum": 8,
+  "lr": 0.0001,
+  "weight_decay": 0.01,
+  "warmup_ratio": 0.05,
+  "min_lr_ratio": 0.05,
+  "max_grad_norm": 1.0,
+  "gradient_checkpointing": true,
+  "eval_batch_size": 4,
+  "eval_epochs": [
+    1,
+    2,
+    3
+  ],
+  "final_beams": 1,
+  "max_new_tokens": 56,
+  "repetition_penalty": 1.0,
+  "workers": 6,
+  "log_steps": 20,
+  "vision_lr": 0.0001,
+  "family": "qwen3vl",
+  "model_class": "Qwen3VLForConditionalGeneration",
+  "processor_kwargs": {
+    "min_pixels": 200704,
+    "max_pixels": 1003520
+  },
+  "prompt": "Transcribe the handwritten line exactly, preserving capitalization, spelling and punctuation.",
+  "lora": {
+    "rank": 32,
+    "alpha": 64,
+    "dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ]
+  }
+}

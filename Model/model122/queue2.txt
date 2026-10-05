@@ -1,0 +1,3 @@
+model122/config_lora_native.json 0
+model122/config_full_native_long.json 0
+model122/config_full_lowres.json 0

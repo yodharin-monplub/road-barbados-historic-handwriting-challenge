@@ -1,0 +1,4 @@
+PP-OCRv6/Kraken CTC member, fixed epoch 7
+complete 5-fold OOF multi_score: 0.805866
+five-member vote including it: 0.909376
+public: pending

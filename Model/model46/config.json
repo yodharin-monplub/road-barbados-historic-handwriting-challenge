@@ -1,0 +1,28 @@
+{
+  "model_number": 46,
+  "scope": "conditional_fold0_transfer_only_not_full_oof",
+  "truth": {"path": "data/processed/train_folds.csv", "sha256": "1173b87f6415f657d89a13b62f4d3d84bc926e550338ad4499963c89a81a16aa"},
+  "model35": {
+    "report": {"path": "outputs/model35/fold0_epoch07_verified/report.json", "sha256": "c4150c4198ff4350ec21c11558e788f0c1f36b86bfc1f7df4f98c1100dcc98c3"},
+    "recipe": {"path": "outputs/model35/fold0_epoch07_verified/fit/fold0_recipe.json", "sha256": "0f3c2cf5ef4e429b2f820e968152229d0cdb85a6cab2384d8adb00690af5a49e"},
+    "terminal_policy": {"path": "model35/terminal_policy.json", "sha256": "1a9d98f8f4d398d71532566bf978a5ae575b379c22cba594ef586f1c86392522"}
+  },
+  "implementations": {
+    "contextual_corrector": {"path": "src/road_htr/contextual_corrector.py", "sha256": "107faf5ab57129b7c5048a52f9f768e9fe88ef57c4adc3d0df15085fabc56b2f"},
+    "boundary_corrector": {"path": "src/road_htr/boundary_corrector.py", "sha256": "9297a8d280dfc8414d27e707bc1e2a5ca8d63a47f7d8ff1f5ad630230fba8ffd"},
+    "confusion_corrector": {"path": "src/road_htr/confusion_corrector.py", "sha256": "5a9b69be9ed6cba9e91493504d38b6f79d1d7adf7236208f42700acdb0cf5b94"},
+    "lexicon_corrector": {"path": "src/road_htr/lexicon_corrector.py", "sha256": "aab9d617fb4bed2bef1426bb210bdbe1d2724702c4ebe87b52d138c0a7b4c969"},
+    "metrics": {"path": "src/road_htr/metrics.py", "sha256": "11e2fe4cc33fd30238b566bc8c72231bbd52c31ffb9c58ce1871db3a3780c9cf"},
+    "schema": {"path": "src/road_htr/schema.py", "sha256": "41f044b7fdc6f7bd7c233813525af1af3ad3123b0cb88528ba06fe0355d5ba8b"},
+    "model35_runner": {"path": "src/road_htr/fold_model_postprocess.py", "sha256": "0c87a8b7542a72b8a340832b8fe7f8ca0e0be84e481c2204e5fd9687daacc420"}
+  },
+  "heldout_fold": 0,
+  "terminal_stage": "confusions",
+  "stage_order": ["raw", "context", "boundaries", "confusions"],
+  "frozen_recipe": {
+    "context": {"context_weight": 16.0, "distance_penalty": 32.0, "enabled": true, "fallback_frequency": 8, "minimum_frequency": 1, "seed_ambiguity_ratio": 1.0, "seed_minimum_frequency": 3, "two_edit_min_length": 6},
+    "boundaries": {"enabled": true, "merge_minimum_frequency": 1, "split_minimum_count": 1},
+    "confusions": {"candidate_minimum_frequency": 2, "context_weight": 2.0, "enabled": true, "score_margin": 12.0}
+  },
+  "output_root": "outputs/model46"
+}

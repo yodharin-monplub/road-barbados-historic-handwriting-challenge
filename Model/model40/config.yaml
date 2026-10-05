@@ -1,0 +1,111 @@
+model:
+  id: Qwen/Qwen2-VL-2B-Instruct
+  revision: 895c3a49bc3fa70a340399125c650a463535e71c
+  license: Apache-2.0
+  class: Qwen2VLForConditionalGeneration
+  trust_remote_code: false
+  local_path: checkpoints/model27/qwen2-vl-2b-instruct
+  local_files_only: true
+  attn_implementation: sdpa
+  expected_files_sha256:
+    LICENSE: 832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e
+    README.md: 74fbe869df708593087ae2ee66a6605d33fc2025937644721dc1360963d037f4
+    chat_template.json: ad60d90252ed0b0705ba14e2d0ad0fec0beac1ea955642b54059b36052d8bc96
+    config.json: 422adefa19e62dd175961cec85bc0400344fe5bf9b22bd1182e05aaae78556e0
+    generation_config.json: d2864bf1edea5863d331edfff48106b586a366f5a2c41aa77731fadc53aa25d2
+    merges.txt: 599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3
+    model-00001-of-00002.safetensors: 994ac2b03f97de8bc647d0fe5eba2e4b632b3e28dc03574c29bdfc36cf47e1b9
+    model-00002-of-00002.safetensors: 92540d8353c8d226a589a3b179bdb33851c970ee2cc2ac7ba035f79425e7b833
+    model.safetensors.index.json: 260ab9fa1418d6d6ab79daa1d9da2c47264f3b72edb4630fc799077ac67d27c6
+    preprocessor_config.json: b5eaad0c2815f07631535dcc58f3c462b0d73693638ad21d19f3c50820eae1cc
+    tokenizer.json: cb63a0a23eef3d5b01063a9880a1925a65aaf4d1591d519910ee3527852950a0
+    tokenizer_config.json: ff5c4fd898fe8c39591eb70e5d39d2782802d4204d6ae9ba1223252f354842a0
+    vocab.json: ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910
+
+provenance:
+  starter_archive: data/raw/Starters.zip
+  starter_archive_sha256: 38de286b4c3958fc2fbebe0135ed487e0a4b9889a203ff62658603d010ec4150
+  members:
+    Starters/VLM/config.yaml: 10d5a991f5963c784fb01cb2b03b55bba53360df825551b692d4b8149a3fa4d7
+    Starters/VLM/trainer.py: 1b38ead00654ef0c5f7c6a1cc62860d63dceb27f7941adfa40e252a5ee75839e
+
+train_csv: data/processed/train_folds.csv
+image_dir: data/raw/images
+output_dir: outputs/model40/fold{fold}
+seed: 20260903
+
+prompt: >-
+  Transcribe every complete handwritten line visible in this Barbados archival
+  crop, in reading order. Ignore only text fragments clipped by the crop
+  boundary. Return only the exact transcription. Preserve original
+  capitalization, spelling, punctuation, line breaks, and repeated internal
+  spaces.
+
+image:
+  merged_patch_size: 28
+  min_pixels: 3136
+  max_pixels: 501760
+  max_image_tokens: 640
+  target_image_tokens: 640
+  min_effective_image_tokens: 512
+  max_sequence_tokens: 768
+  max_generation_context_tokens: 816
+  resize_policy: aspect_preserving_letterbox_lanczos
+
+quantization:
+  load_in_4bit: true
+  type: nf4
+  double_quant: true
+  compute_dtype: float16
+
+architecture:
+  expected_language_layers: 28
+  expected_vision_blocks: 32
+  expected_max_position_embeddings: 32768
+  expected_target_modules: 326
+  expected_trainable_parameters: 14610432
+  expected_trainable_tensors: 652
+
+cross_validation:
+  folds: 5
+
+lora:
+  rank: 8
+  alpha: 16
+  dropout: 0.05
+  language_projections: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+  adapted_vision_blocks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+  vision_projections: [qkv, proj, fc1, fc2]
+  include_verified_merger: true
+
+training:
+  epochs: 3
+  batch_size: 1
+  eval_batch_size: 1
+  gradient_accumulation: 16
+  expected_train_rows_per_fold: 3276
+  expected_updates_per_epoch: 205
+  expected_total_updates: 615
+  learning_rate: 0.00003
+  weight_decay: 0.01
+  warmup_ratio: 0.05
+  scheduler: cosine
+  max_grad_norm: 1.0
+  logging_steps: 10
+  gradient_checkpointing: true
+
+generation:
+  max_new_tokens: 48
+  do_sample: false
+  num_beams: 1
+  repetition_penalty: 1.05
+  no_repeat_ngram_size: 4
+
+smoke:
+  max_allocated_gib: 5.3
+  max_reserved_gib: 5.3
+  expected_target_modules: 326
+  expected_trainable_parameters: 14610432
+  minimum_4bit_modules: 100
+  max_trainable_parameters: 15000000
+  report_dir: outputs/model40/smoke

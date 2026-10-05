@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "model_number": 53,
+  "policy_name": "frozen_aligned_token_fusion_v1",
+  "fallback_model": "model25",
+  "vlm_stage": "model46_confusions",
+  "selection_inputs": [
+    "fallback_prediction",
+    "vlm_prediction",
+    "fold_excluded_label_token_counts"
+  ],
+  "forbidden_selection_inputs": [
+    "heldout_target",
+    "identifier",
+    "image_geometry",
+    "test_membership"
+  ],
+  "policy": {
+    "minimum_candidate_frequency": 5,
+    "minimum_candidate_source_ratio": 4.0,
+    "context_weight": 4.0,
+    "minimum_context_score_advantage": 4.0,
+    "maximum_short_word_edit_distance": 1,
+    "maximum_long_word_edit_distance": 2,
+    "long_word_minimum_length": 6,
+    "require_agreed_neighbor": true,
+    "require_same_edge_punctuation": true
+  },
+  "output_root": "outputs/model53"
+}

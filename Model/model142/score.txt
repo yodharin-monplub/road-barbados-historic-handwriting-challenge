@@ -1,0 +1,3 @@
+﻿Quality-weighted word vote - no gain, not deployed
+best variant (logit, margin 1.0): 0.913905 versus 0.913774 for the deployed equal-weight rule
+weighting by measured accuracy is worse (0.912095), it suppresses the weak decorrelated members

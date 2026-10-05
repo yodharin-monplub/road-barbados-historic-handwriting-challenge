@@ -1,0 +1,11 @@
+GOT-OCR2 member (fourth architecture family) - all five folds complete
+standalone, vision encoder adapted, per fold: 0.813555 / 0.814321 / 0.812775 / 0.817287 / 0.814685
+complete 5-fold OOF, anchor model134_pseudo3 (the submission #7 recipe):
+  seven members (submission #7)          0.914150
+  eight members (+GOT-OCR2), min_votes 2 0.914857  (+0.000707)  <- best CV
+  eight members, min_votes 3             (anchor-140 run: 0.913367, worse)
+  GOT-OCR2 replacing Kraken              (anchor-140 run: 0.912438, worse)
+paired bootstrap (3,000, Model124/bootstrap.py): 95% [+0.000139, +0.001289], 99.2% positive - significant
+candidate: Other/submissions/model141_ensemble8_candidate.csv (23 lines differ from #7)
+sha256 4dc97fbf26acac9d73d36365daa913cdaa5d0e722015fe478967eaec0564b751
+public: not yet submitted

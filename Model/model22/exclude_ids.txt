@@ -1,0 +1,14 @@
+# Model22-only exclusions. Keep data/processed/train_folds.csv unchanged.
+#
+# Confirmed unusable image/transcription pairs from the original training CSV
+# (already absent from the canonical 4,095-row clean folds):
+79tMUVyfIdy3GzkG
+rh8o7bdCGOIBFPwH
+F8DYDDp2AvW9Dytw
+
+# Valid transcriptions that cannot fit PP-OCRv6's CTC time axis at height 96,
+# horizontal padding 16, and width subsampling 8. Kraken otherwise silently
+# substitutes random samples for them:
+EcxuqKeZl7OQexfB
+gP7kGWfDFYMbZ8nO
+PO7QQLWIFOT65BTz

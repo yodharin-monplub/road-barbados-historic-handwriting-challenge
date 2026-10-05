@@ -1,0 +1,1 @@
+Model/model143/config_vision.json 1 --predict-test

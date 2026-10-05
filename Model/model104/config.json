@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "model_kind": "metric_weighted_logistic_selector",
+  "single_fold_inner_splits": 5,
+  "nested_lm_splits": 5,
+  "seed": "model33-selector-v1",
+  "char_order": 4,
+  "lm_alpha": 0.25,
+  "logistic_epochs": 900,
+  "logistic_learning_rate": 0.035,
+  "logistic_l2": 0.08,
+  "minimum_scale": 1e-06,
+  "notes": "Frozen selector screen; A=Model102, B=Model92 checkpoint 400. Configuration copied unchanged from Model101."
+}

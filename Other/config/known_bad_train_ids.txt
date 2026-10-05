@@ -1,0 +1,5 @@
+# Confirmed unusable rows after visual audit on 2026-09-03. The original CSV is
+# retained unchanged. See config/suspect_row_audit.txt for the decisions.
+79tMUVyfIdy3GzkG
+rh8o7bdCGOIBFPwH
+F8DYDDp2AvW9Dytw

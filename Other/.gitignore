@@ -1,0 +1,17 @@
+# Competition data is licensed for this challenge only. Never commit it.
+data/raw/
+data/processed/
+checkpoints/
+outputs/
+submissions/
+reports/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.venv-*/
+.env

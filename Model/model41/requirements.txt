@@ -1,0 +1,3 @@
+# Reuse the pinned Qwen2-VL/PEFT environment already installed for Model39.
+-r ../model39/requirements.txt
+

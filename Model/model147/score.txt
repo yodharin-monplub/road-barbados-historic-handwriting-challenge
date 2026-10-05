@@ -1,0 +1,38 @@
+Model147: Qwen3-VL-8B (Model146 recipe) + ROUND-5 pseudo-labels
+Round-5 labels come from the eleven-member ensemble that scores 0.920859 OOF - by far the
+best labeller used so far (round 4 came from a six-member vote at 0.913774). Fold k's
+labels come only from fold-k models, so the held-out score stays honest.
+Labels changed 88-123 lines per fold against the anchor (round 4 changed 53-78).
+
+standalone per fold: 0.907760 / 0.909089 / 0.902662 / 0.904058 / 0.901287
+complete 5-fold OOF: 0.904972   <- BEST SINGLE MEMBER EVER
+  Model146, same model without pseudo-labels: 0.899437  (+0.005535)
+  previous best member, Model144:             0.902563
+Beat Model146 on every fold, by 0.002 to 0.008. The pseudo-label ladder is alive on
+8B as it was on 4B (+0.0046 for Model145); it died only for the LightOnOCR member.
+
+ENSEMBLE (complete OOF, anchor model134_pseudo3, min_votes 2)
+  eleven members (Model146/score.txt)      0.920859
+  TWELVE (+model147)                       0.921278  (+0.000419)
+  twelve, min_votes 3                      0.920918
+  twelve, also dropping model122_prod_lora 0.921323  (+0.000465)
+  model147 REPLACING model146              0.920707  (-0.000151)
+  model147 REPLACING model145              0.920687  (-0.000171)
+  model147 instead of BOTH 145 and 146     0.920057  (-0.000802)
+bootstrap twelve vs eleven: +0.000419, 95% [-0.000124, +0.000998], 93.5% positive - NOT significant
+
+The best single member adds the least. Its labels came from this very ensemble, so its
+errors are correlated with it; and it cannot replace its weaker siblings, which still
+contribute decorrelated votes. Diversity keeps beating strength, now measured four times.
+The model122_prod_lora drop is +0.00005 over plain twelve - inside noise, and picking it
+would be selecting on the same CV it is scored against, so plain twelve is deployed.
+
+candidate: Other/submissions/model147_ensemble12_candidate.csv
+  54 of 1374 test lines differ from the eleven-member candidate
+  sha256 dd5eec4c56bc8efb328127bc6e394cb6e95aca276655ba90be0b2a2a27f1f77c
+public: not yet submitted
+Precedent for submitting a non-significant gain: Model140 (+0.00033 CV, bootstrap
+inconclusive) still moved the public score, and Model144 (+0.00173 CV) gave +0.00045 public.
+
+cost: about 4.53 USD for five folds on rented RTX 3090s (10-20 s/step, 3-5 h each).
+Labels are saved in Other/outputs/pseudo5 for reuse.

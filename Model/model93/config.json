@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "model": {
+    "id": "Qwen/Qwen3-30B-A3B",
+    "revision": "ad44e777bcd18fa416d9da3bd8f70d33ebb85d39",
+    "license": "Apache-2.0",
+    "parameters_total": 30532122624,
+    "parameters_active": 3300000000,
+    "expected_weight_bytes": 61064245248,
+    "expected_weight_file_bytes": 61066575648,
+    "expected_shards": 16,
+    "expected_metadata_sha256": {
+      "README.md": "1897b7cdf7b5f45ae847b87f9b416d4635fe73228e0daac669a4e1f3e5948858",
+      "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "config.json": "2850ddb3bf7aecad20b611e2d44f3077fc8193f4827c93beddd4c02ad63c2297",
+      "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+      "model.safetensors.index.json": "df0d481ec595c55a0ba58426d517390c6214a566ec4ff1c8fc4bbce9f57b3c24",
+      "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+    },
+    "dtype": "bfloat16",
+    "max_model_len": 4096,
+    "gpu_memory_utilization": 0.92,
+    "minimum_gpu_memory_gib": 75
+  },
+  "data": {
+    "truth": "data/processed/train_folds.csv",
+    "test": "data/raw/Test.csv",
+    "sample_submission": "data/raw/SampleSubmission.csv"
+  },
+  "sources": {
+    "oof": {
+      "primary": "outputs/model88/word_rover_vs_kraken_selector/crossfit_predictions.csv",
+      "full": "outputs/model76/model73_step400_oof.csv",
+      "enhanced": "outputs/model83/model83_enhanced_oof.csv",
+      "center": "outputs/model83/model83_center_oof.csv",
+      "center_enhanced": "outputs/model83/model83_center_enhanced_oof.csv",
+      "kraken": "outputs/model35/allfold_epoch07_verified/predictions/03_confusions_oof.csv"
+    },
+    "test": {
+      "primary": "outputs/model88/test.csv",
+      "full": "outputs/model83/model77_test/full.csv",
+      "enhanced": "outputs/model83/model77_test/enhanced.csv",
+      "center": "outputs/model83/model77_test/center.csv",
+      "center_enhanced": "outputs/model83/model77_test/center_enhanced.csv",
+      "kraken": "outputs/model35/deployment_epoch07/confusions_test.csv"
+    }
+  },
+  "retrieval": {
+    "correction_examples": 3,
+    "identity_examples": 1,
+    "maximum_example_edit_ratio": 0.3,
+    "character_similarity_weight": 0.65,
+    "word_similarity_weight": 0.35
+  },
+  "generation": {
+    "thinking": false,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_new_tokens": 160,
+    "seed": 20260906
+  },
+  "validity": {
+    "maximum_characters": 180,
+    "maximum_edit_ratio": 0.75,
+    "minimum_word_ratio": 0.4,
+    "maximum_word_ratio": 1.6,
+    "ascii_only": true
+  },
+  "promotion": {
+    "fold0_minimum_gain": 0.001,
+    "confirmation_minimum_gain": 0.0005,
+    "confirmation_minimum_nonnegative_folds": 3,
+    "bootstrap_samples": 5000,
+    "bootstrap_minimum_positive_fraction": 0.95
+  }
+}

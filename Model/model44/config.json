@@ -1,0 +1,27 @@
+{
+  "model_number": 44,
+  "purpose": "Frozen whole-vector decoding-policy challenger for Model39-compatible broad adapters.",
+  "base_model39": {
+    "config": "model39/config.yaml",
+    "config_sha256": "4e8d28cdbeccd719a76a989a3de29fefbd3d72f9f444c76ec3ec6ba729479ef5",
+    "sources": {
+      "model39_infer": {"path": "model39/infer.py", "sha256": "65384c442302019537439d98c9bc200e9f6f2d4bc51e1e4dc29363f213700c72"},
+      "broad_runtime": {"path": "src/road_htr/qwen2_vl_broad.py", "sha256": "ab8d9b77154bd3c0ef8470b07310c85e6408ca4a98f72b19a7baba478da1a606"},
+      "challenger_runtime": {"path": "src/road_htr/qwen2_vl_challenger.py", "sha256": "148b39afac28d78de32f68acabc590a5cd885465820171c2d0efc2e2d862ee12"},
+      "schema": {"path": "src/road_htr/schema.py", "sha256": "41f044b7fdc6f7bd7c233813525af1af3ad3123b0cb88528ba06fe0355d5ba8b"},
+      "submission": {"path": "src/road_htr/submission.py", "sha256": "6e1399a008b5bceba9d51be3b50ac57029dd9748759d5dbd1c6e2219d1129c42"}
+    },
+    "adapter_root": "outputs/model39",
+    "required_model_number": 39
+  },
+  "inputs": {
+    "fold_oof": {"path": "data/processed/train_folds.csv", "sha256": "1173b87f6415f657d89a13b62f4d3d84bc926e550338ad4499963c89a81a16aa"},
+    "test": {"path": "data/raw/Test.csv", "sha256": "6cb1ecc1aa8dec912790c173be5bc8f176c14bb3c4eccee54b487ba0b2363deb"}
+  },
+  "panel": [
+    {"name": "greedy", "do_sample": false, "num_beams": 1, "num_return_sequences": 1, "max_new_tokens": 48, "repetition_penalty": 1.05, "no_repeat_ngram_size": 4, "use_cache": true},
+    {"name": "beam3_starter_aligned", "do_sample": false, "num_beams": 3, "num_return_sequences": 1, "max_new_tokens": 48, "repetition_penalty": 1.05, "no_repeat_ngram_size": 4, "use_cache": true}
+  ],
+  "frozen_omissions": ["length_penalty", "early_stopping", "eos_token_id", "forced_eos_token_id"],
+  "output_root": "outputs/model44"
+}

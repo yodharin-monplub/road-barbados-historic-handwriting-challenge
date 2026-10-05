@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "outer_fold": 0,
+  "expected_truth_rows": 4095,
+  "expected_fold_rows": 819,
+  "splits": 5,
+  "char_order": 4,
+  "lm_alpha": 0.25,
+  "logistic_epochs": 80,
+  "logistic_learning_rate": 0.035,
+  "minimum_scale": 1e-6,
+  "partition_seeds": [
+    "model42-frozen-confusions-v1",
+    "model42-frozen-confusions-salt-01"
+  ],
+  "variants": [
+    {
+      "name": "primary_pair_geometry",
+      "feature_set": "pair_geometry",
+      "logistic_l2": 0.2
+    }
+  ],
+  "promotion_rule": {
+    "primary_variant": "primary_pair_geometry",
+    "minimum_score_gain": 0.001,
+    "require_all_salts_positive": true,
+    "require_all_partitions_positive": true,
+    "scope": "conditional_fold0_inner_crossfit_only"
+  },
+  "artifacts": {
+    "truth": {
+      "path": "data/processed/train_folds.csv",
+      "sha256": "1173b87f6415f657d89a13b62f4d3d84bc926e550338ad4499963c89a81a16aa"
+    },
+    "model35_report": {
+      "path": "outputs/model35/fold0_epoch07_verified/report.json",
+      "sha256": "c4150c4198ff4350ec21c11558e788f0c1f36b86bfc1f7df4f98c1100dcc98c3"
+    },
+    "candidate_model35_confusions": {
+      "path": "outputs/model35/fold0_epoch07_verified/predictions/03_confusions_fold0.csv",
+      "sha256": "4def24329dde8203a76f09cfd48aa3c2afd8fd695f3e9ba31fb7c564e8eb85d4"
+    },
+    "candidate_model25": {
+      "path": "outputs/model25/allfold_oof.csv",
+      "sha256": "99ae115570e44a249641551143f2134458c44039d59595cb291f09cb3b1b7251"
+    },
+    "model33_source": {
+      "path": "src/road_htr/crossfit_candidate_selector.py",
+      "sha256": "b0b16d65717d62952c936d1fd7499b26d4ea5dddccce2d234cb96e15b9a81d18"
+    }
+  }
+}

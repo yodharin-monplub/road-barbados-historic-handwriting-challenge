@@ -1,0 +1,11 @@
+# The base checkpoint and every Python dependency are pinned for reproducibility.
+# These match the existing isolated CUDA 13.0 VLM host; do not downgrade them.
+torch==2.13.0
+torchvision==0.28.0
+transformers==4.49.0
+accelerate==1.14.0
+bitsandbytes==0.50.2
+peft==0.14.0
+safetensors==0.7.0
+Pillow==12.3.0
+PyYAML==6.0.3

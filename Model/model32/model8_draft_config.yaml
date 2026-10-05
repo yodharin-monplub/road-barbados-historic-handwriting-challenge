@@ -1,0 +1,18 @@
+pretrained_model: checkpoints/model8/medium.safetensors
+image_dir: data/raw/images
+image_variant: full
+
+# Model32 drafts must be a deterministic function of image pixels and the
+# frozen zero-shot checkpoint. In particular, do not enable the Train.csv
+# character inventory: that would make a held-out draft depend on labels.
+inference:
+  accelerator: cpu
+  device: auto
+  precision: 32-true
+  batch_size: 1
+  threads: 8
+  line_workers: 0
+  padding: 16
+  progress_every: 25
+  constrain_charset: false
+  preserve_internal_spaces: true

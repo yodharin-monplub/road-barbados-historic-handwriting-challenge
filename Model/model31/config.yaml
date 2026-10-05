@@ -1,0 +1,103 @@
+model:
+  id: google/byt5-small
+  # Immutable safetensors-conversion commit based on canonical revision 68377bd.
+  revision: 6f07f879d308b7b762708b50c83d41b27e329992
+  license: Apache-2.0
+  local_path: checkpoints/model31/google-byt5-small-6f07f87
+  local_files_only: true
+  trust_remote_code: false
+  required_files:
+    - config.json
+    - generation_config.json
+    - model.safetensors
+    - special_tokens_map.json
+    - tokenizer_config.json
+  expected_files_sha256:
+    model.safetensors: 1dfcb862fbe12b97e63e1cdb8b3920a97d0ef4ed3a11e431829ebeacac3fc026
+  expected_weight_bytes: 1198571496
+  expected_architecture:
+    architectures: [T5ForConditionalGeneration]
+    d_ff: 3584
+    d_kv: 64
+    d_model: 1472
+    is_encoder_decoder: true
+    model_type: t5
+    num_decoder_layers: 4
+    num_heads: 6
+    num_layers: 12
+    tokenizer_class: ByT5Tokenizer
+    vocab_size: 384
+
+data:
+  truth_csv: data/processed/train_folds.csv
+  train_predictions: outputs/model25/allfold_oof.csv
+  test_predictions: outputs/model25/test.csv
+  sample_submission: data/raw/SampleSubmission.csv
+
+output_dir: outputs/model31/fold{fold}
+seed: 20260903
+
+cross_validation:
+  folds: [0, 1, 2, 3, 4]
+  # For outer f, (f + 1) mod 5 selects epochs/gate. Refit uses every fold != f.
+  inner_policy: next_fold
+
+sequence:
+  # The audited Train labels are all ASCII and at most exactly 120 bytes.
+  maximum_utf8_bytes: 120
+  max_source_tokens: 122
+  max_target_tokens: 122
+  training_overlength: error
+  inference_overlength: identity
+
+lora:
+  rank: 8
+  alpha: 16
+  dropout: 0.05
+  projections: [q, v]
+  expected_target_modules: 40
+  max_trainable_parameters: 1000000
+
+training:
+  epochs: 6
+  batch_size: 2
+  eval_batch_size: 4
+  gradient_accumulation: 8
+  learning_rate: 0.0002
+  minimum_learning_rate: 0.000002
+  weight_decay: 0.01
+  warmup_ratio: 0.05
+  max_grad_norm: 1.0
+  gradient_checkpointing: true
+  precision: float16
+
+generation:
+  max_new_tokens: 122
+  do_sample: false
+  num_beams: 1
+
+gate:
+  # Selected on the inner genuine OOF fold, then frozen for the outer/test rows.
+  edit_ratio_thresholds: [0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 0.15, 0.20, 0.30, 0.50, 1.0]
+  minimum_inner_score_gain: 0.0002
+
+synthetic:
+  # Preregistered but off for the first baseline. If enabled before a run,
+  # corruption mappings are learned from that stage's training rows only.
+  enabled: false
+  copies_per_row: 1
+  maximum_character_probability: 0.12
+
+runtime:
+  device: cuda:0
+  expected_versions:
+    torch: 2.13.0
+    transformers: 4.49.0
+    peft: 0.14.0
+    accelerate: 1.14.0
+    safetensors: 0.7.0
+
+smoke:
+  receipt: outputs/model31/smoke.json
+  maximum_reserved_gib: 5.3
+

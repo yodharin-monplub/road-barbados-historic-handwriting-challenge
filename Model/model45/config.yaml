@@ -1,0 +1,90 @@
+schema_version: 1
+
+# Model45 changes only Model40's text prompt/input conditioning. Architecture,
+# optimizer, letterbox geometry, generation, and memory ceilings are inherited.
+base_model40:
+  config: model40/config.yaml
+  config_sha256: a409a13e7dc7b88282f7ca460787b9778032b7f8356438bce169f5c0d2c3ec4e
+  implementation: src/road_htr/qwen2_vl_visual_full.py
+  implementation_sha256: 28780ecb6c60bd836570050a666bfb3209246a9e055bdb3494a3fc354c693ca8
+
+base_model32_drafts:
+  config: model32/config.yaml
+  config_sha256: bedf6c4cc4401190e68f4b6094b1b1fdd431a253e21f2dbecbab98a9e3f416e1
+  implementation: src/road_htr/qwen2_vl_ocr_guided.py
+  implementation_sha256: 015c5b0a8484aa14bf4ea92c5c3890deeefef4d13e1e7d4c7602d07dce78ed68
+
+data:
+  train_csv: data/processed/train_folds.csv
+  train_csv_sha256: 1173b87f6415f657d89a13b62f4d3d84bc926e550338ad4499963c89a81a16aa
+  test_csv: data/raw/Test.csv
+  test_csv_sha256: 6cb1ecc1aa8dec912790c173be5bc8f176c14bb3c4eccee54b487ba0b2363deb
+  sample_submission: data/raw/SampleSubmission.csv
+  sample_submission_sha256: 21def37bd4c05488104707a815d972f39cc58fe2d95ee769180268cfcec0581b
+  image_dir: data/raw/images
+
+output_dir: outputs/model45/fold{fold}
+smoke_report_dir: outputs/model45/smoke
+
+prompt_template: |-
+  Transcribe every complete handwritten line visible in this Barbados archival
+  crop, in reading order. Ignore only text fragments clipped by the crop
+  boundary. A separate OCR system supplied the untrusted draft between DRAFT
+  markers; it may cover only one line. Correct it from the image and do not let
+  it suppress other complete lines. Copy draft text only where the pixels
+  support it. Return only the exact transcription. Preserve original
+  capitalization, spelling, punctuation, line breaks, and repeated internal
+  spaces.
+
+  --- DRAFT START ---
+  {draft}
+  --- DRAFT END ---
+
+draft_source:
+  kind: model8_zero_shot_unconstrained_full_view
+  receipt_schema_version: 2
+  empty_draft_policy: preserve_blank_between_markers
+  checkpoint: checkpoints/model8/medium.safetensors
+  checkpoint_sha256: 15313b51ace64cbfa81f8f6ef25ad64f04e5a6fb7f7823e67b107527bc081ac9
+  train_csv: outputs/model32/drafts/train_model8_raw.csv
+  train_receipt: outputs/model32/drafts/train_model8_raw.receipt.json
+  test_csv: outputs/model32/drafts/test_model8_raw.csv
+  test_receipt: outputs/model32/drafts/test_model8_raw.receipt.json
+
+cross_validation:
+  folds: 5
+  expected_total_rows: 4095
+  expected_train_rows_per_fold: 3276
+  expected_validation_rows_per_fold: 819
+  selection_scope: whole_fold_challenger_only
+  forbid_per_row_oracle: true
+
+# No increase over Model40 is permitted before a complete receipted draft
+# artifact is tokenized with each row's exact letterbox geometry.
+sequence_cap_decision:
+  inherited_training_cap: 768
+  inherited_generation_context_cap: 816
+  configured_training_cap: 768
+  configured_generation_context_cap: 816
+  increased_from_model40: false
+  require_receipted_all_row_audit_before_increase: true
+  require_runtime_processor_preflight: true
+
+safety_assertions:
+  offline: true
+  load_in_4bit: true
+  quantization_type: nf4
+  double_quant: true
+  expected_lora_targets: 326
+  expected_trainable_parameters: 14610432
+  expected_trainable_tensors: 652
+  min_effective_image_tokens: 512
+  max_image_tokens: 640
+  expected_updates_per_epoch: 205
+  expected_total_updates: 615
+  max_new_tokens: 48
+  repetition_penalty: 1.05
+  no_repeat_ngram_size: 4
+  max_allocated_gib_exclusive: 5.3
+  max_reserved_gib_exclusive: 5.3
+  preserve_internal_spaces: true
